@@ -4,78 +4,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rodolfo Correa — Inteligência Comercial, Conteúdo & Estratégia</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0D0D0D; 
-    --ink: #F5F5F5;
-    --accent: #FF3B00;
-    --accent-light: rgba(255, 59, 0, 0.12);
-    --accent-border: rgba(255, 59, 0, 0.3);
-    --ink-soft: rgba(245, 245, 245, 0.65);
-    --ink-xsoft: rgba(245, 245, 245, 0.25);
-    --card-hover: rgba(255, 255, 255, 0.03);
-    --serif: 'Playfair Display', Georgia, serif;
-    --sans: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
-  }
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 16px; scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
-
-  /* Nav */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: flex-end; padding: 1.25rem clamp(1.5rem, 6vw, 5rem); background: rgba(13, 13, 13, 0.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--accent-border); }
-  .nav-right { display: flex; align-items: center; gap: 2rem; }
-  .nav-link { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; }
-  .nav-link:hover { color: var(--accent); }
-
-  /* Hero */
-  .hero { min-height: 100svh; display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: center; padding: 8rem clamp(2rem, 6vw, 5rem); border-bottom: 1px solid var(--accent-border); }
-  .hero-headline { font-family: var(--serif); font-size: clamp(3.5rem, 6vw, 6rem); line-height: 1.05; }
-  .hero-headline em { font-style: italic; color: var(--accent); }
-  .hero-bio { font-size: 1.05rem; font-weight: 300; color: var(--ink-soft); max-width: 46ch; margin: 2rem 0; border-left: 2px solid var(--accent); padding-left: 1.5rem; }
-  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #FFF; padding: 1rem 2rem; text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; border-radius: 2px; }
-
+  :root { --bg: #0D0D0D; --ink: #F5F5F5; --accent: #FF3B00; --accent-border: rgba(255, 59, 0, 0.3); --ink-soft: rgba(245, 245, 245, 0.65); --ink-xsoft: rgba(245, 245, 245, 0.25); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: flex-end; padding: 1.5rem 5rem; background: rgba(13,13,13,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--accent-border); }
+  .nav-link { color: var(--ink-soft); text-decoration: none; margin-left: 2rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+  .hero { padding: 10rem 5rem; }
+  h1 { font-family: 'Playfair Display', serif; font-size: 5rem; }
+  em { color: var(--accent); font-style: italic; }
+  
   /* Carrossel Ajustado */
-  .brands-section { padding: 4rem 0; border-bottom: 1px solid var(--ink-xsoft); background: #050505; }
+  .brands-section { padding: 4rem 0; border-bottom: 1px solid var(--accent-border); overflow: hidden; background: #050505; }
   .brands-track { display: flex; align-items: center; gap: 6rem; width: max-content; animation: scrollBrands 15s linear infinite; }
   @keyframes scrollBrands { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .brand-item { height: 100px; filter: brightness(0) invert(1) opacity(0.5); }
-  .brand-item img { height: 100%; width: auto; object-fit: contain; }
+  .brand-item img { height: 100%; width: auto; }
 
-  /* Grid Projetos */
-  .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; padding: 4rem clamp(1.5rem, 6vw, 5rem); }
-  .work-card { padding: 2.5rem; background: rgba(255,255,255,0.02); border: 1px solid var(--accent-border); text-decoration: none; color: inherit; transition: 0.3s; }
+  /* Grid */
+  .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; padding: 4rem 5rem; }
+  .work-card { padding: 2rem; border: 1px solid var(--accent-border); background: #111; color: var(--ink); text-decoration: none; display: block; }
   .work-card:hover { border-color: var(--accent); }
-
-  /* Contact Strip */
-  .contact-strip { background: #111; padding: 6rem clamp(1.5rem, 6vw, 5rem); border-top: 1px solid var(--accent-border); display: flex; justify-content: space-between; align-items: center; }
-  .contact-headline { font-family: var(--serif); font-size: 3rem; }
-  .contact-actions { display: flex; gap: 1rem; }
-  .contact-btn { padding: 1rem 2rem; text-decoration: none; font-weight: 700; border-radius: 2px; color: #000; }
-  .contact-btn--whatsapp { background: #25D366; }
-  .contact-btn--linkedin { background: #0A66C2; color: #FFF; }
-
-  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .contact-strip { flex-direction: column; gap: 2rem; } }
+  
+  /* Contato */
+  .contact-strip { padding: 6rem 5rem; background: #111; border-top: 1px solid var(--accent-border); display: flex; justify-content: space-between; align-items: center; }
+  .contact-btn { padding: 1rem 2rem; text-decoration: none; font-weight: 700; margin-left: 1rem; color: #000; }
+  .wa { background: #25D366; } .li { background: #0A66C2; color: #fff; }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-right">
-    <a href="#work" class="nav-link">Projetos</a>
-    <a href="#contact" class="nav-link">Contato</a>
-  </div>
+  <a href="#work" class="nav-link">Projetos</a>
+  <a href="#contact" class="nav-link">Contato</a>
 </nav>
 
 <div class="hero">
-  <div class="hero-text">
-    <h1 class="hero-headline">Rodolfo<br><em>Correa.</em></h1>
-    <p class="hero-bio">Analista de comunicação e marketing focado em estratégia, branding e resultados digitais.</p>
-    <a href="#work" class="btn-primary">Ver Trabalhos</a>
-  </div>
+  <h1>Rodolfo<br><em>Correa.</em></h1>
 </div>
 
 <div class="brands-section">
@@ -92,17 +58,23 @@
 </div>
 
 <section id="work" class="works-grid">
-  <a class="work-card" href="https://rodolfocorrea.notion.site/A-Solidariedade-a-Nossa-Energia-Cocamar-12f943d2d8078116b36bcffc1bd58f10" target="_blank">
-    <h3>Cocamar — Energia</h3>
-    <p>Projeto de energia fotovoltaica.</p>
-  </a>
-  </section>
+  <a class="work-card" href="https://rodolfocorrea.notion.site/A-Solidariedade-a-Nossa-Energia-Cocamar-12f943d2d8078116b36bcffc1bd58f10"><h3>Cocamar — A Solidariedade</h3></a>
+  <a class="work-card" href="https://www.notion.so/Primeiro-Dexis-Investor-Day-Sicredi-12f943d2d80780a59df4e74ff9978dc7"><h3>Sicredi — Investor Day</h3></a>
+  <a class="work-card" href="https://www.notion.so/G1-Especial-Publicit-rio-130943d2d8078029ae68d080e3127eac"><h3>G1 — Especial Publicitário</h3></a>
+  <a class="work-card" href="https://notion.so/Trilha-do-Outbound-342943d2d8078030bc30cd1454d86084"><h3>Trilha do Outbound</h3></a>
+  <a class="work-card" href="https://notion.so/Desenvolvimento-gil-de-Landing-Pages-Vibe-Coding-364943d2d80780068d86e70fbfdc72ba"><h3>Vibe Coding — Landing Pages</h3></a>
+  <a class="work-card" href="https://www.notion.so/Social-Instagram-Gume-Intelig-ncia-364943d2d807803fb6b7e81a3c5baf97"><h3>Gume Inteligência — Instagram</h3></a>
+  <a class="work-card" href="https://www.notion.so/RPC-Afiliada-TV-Globo-12f943d2d80780a79d36e43393121b6a"><h3>RPC — Afiliada TV Globo</h3></a>
+  <a class="work-card" href="https://www.notion.so/Nova-Sede-Sicredi-Dexis-12f943d2d80780cea7d3e82dd392dd5f"><h3>Sicredi Dexis — Nova Sede</h3></a>
+  <a class="work-card" href="https://www.notion.so/Mega-Outlet-2024-12f943d2d8078044a840c3e685d400e3"><h3>Mega Outlet 2024</h3></a>
+  <a class="work-card" href="https://www.notion.so/Audiovisuais-1b6943d2d80780f7ab9cede2959f9c26"><h3>Audiovisuais</h3></a>
+</section>
 
 <section id="contact" class="contact-strip">
-  <h2 class="contact-headline">Vamos conversar?</h2>
-  <div class="contact-actions">
-    <a href="https://wa.me/5544991724857" target="_blank" class="contact-btn contact-btn--whatsapp">WhatsApp</a>
-    <a href="https://linkedin.com/in/rodolffocorrea" target="_blank" class="contact-btn contact-btn--linkedin">LinkedIn</a>
+  <h2>Pronto para começar?</h2>
+  <div>
+    <a href="https://wa.me/5544991724857" class="contact-btn wa">WhatsApp</a>
+    <a href="https://linkedin.com/in/rodolffocorrea" class="contact-btn li">LinkedIn</a>
   </div>
 </section>
 
