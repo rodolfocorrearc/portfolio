@@ -215,7 +215,7 @@
 
   .photo-frame {
     position: relative;
-    width: clamp(220px, 32vw, 380px);
+    width: clamp(160px, 22vw, 260px);
     aspect-ratio: 3/4;
   }
 
@@ -545,7 +545,7 @@
 
     .hero::after { display: none; }
     .hero-photo { order: -1; }
-    .photo-frame { width: min(260px, 70vw); }
+    .photo-frame { width: min(180px, 55vw); }
 
     .stats-bar { flex-wrap: wrap; }
     .stat-item { min-width: 50%; border-bottom: 1px solid var(--olive-border); }
@@ -595,7 +595,7 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    padding: 1.5rem 0 2rem;
+    padding: 2rem 0 2.5rem;
   }
 
   .brands-track-wrapper::before,
@@ -613,7 +613,7 @@
   .brands-track {
     display: flex;
     align-items: center;
-    gap: 3.5rem;
+    gap: 5rem;
     width: max-content;
     animation: scrollBrands 28s linear infinite;
   }
@@ -629,8 +629,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 44px;
-    min-width: 120px;
+    height: 90px;
+    min-width: 160px;
     flex-shrink: 0;
     opacity: 0.55;
     transition: opacity 0.25s;
@@ -640,9 +640,9 @@
   .brand-item:hover { opacity: 1; filter: grayscale(0); }
 
   .brand-item img {
-    height: 56px;
+    height: 80px;
     width: auto;
-    max-width: 160px;
+    max-width: 200px;
     object-fit: contain;
   }
 
@@ -730,6 +730,185 @@
     border-color: #0A66C2;
     color: #fff;
   }
+
+
+  /* ─── AWARD FEATURED CARD ─── */
+  .award-card {
+    background: var(--ink) !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0 !important;
+    overflow: hidden;
+    min-height: 340px;
+  }
+
+  .award-card::before { background: var(--olive) !important; height: 3px; }
+  .award-card:hover { background: var(--ink) !important; }
+
+  .award-left {
+    padding: 2.5rem 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .award-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #c8a84b;
+    background: rgba(200,168,75,0.12);
+    border: 1px solid rgba(200,168,75,0.35);
+    padding: 0.3rem 0.7rem;
+    width: fit-content;
+  }
+
+  .award-tag {
+    background: rgba(118,128,101,0.2) !important;
+    color: rgba(251,251,250,0.7) !important;
+    border-color: rgba(118,128,101,0.3) !important;
+  }
+
+  .award-title {
+    color: var(--bg) !important;
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem) !important;
+    margin-top: 1rem;
+    flex-grow: 1;
+  }
+
+  .award-title em {
+    font-style: italic;
+    color: var(--olive);
+  }
+
+  .award-desc {
+    color: rgba(251,251,250,0.6) !important;
+    margin-top: 1rem;
+  }
+
+  .award-footer {
+    border-top-color: rgba(118,128,101,0.25) !important;
+    margin-top: 1.5rem;
+  }
+
+  .award-cta {
+    color: var(--bg) !important;
+    border-bottom-color: var(--olive) !important;
+  }
+
+  .award-card:hover .award-cta {
+    color: var(--olive) !important;
+  }
+
+  .award-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(118,128,101,0.08);
+    border-left: 1px solid rgba(118,128,101,0.2);
+    overflow: hidden;
+    padding: 2.5rem;
+  }
+
+  .award-logo {
+    width: 60%;
+    max-width: 200px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.4s ease;
+  }
+
+  .award-card:hover .award-logo { transform: scale(1.04); }
+
+  .award-visual-lines {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    pointer-events: none;
+  }
+
+  .av-line {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(118,128,101,0.2), transparent);
+  }
+
+  @media (max-width: 768px) {
+    .award-card { grid-template-columns: 1fr !important; }
+    .award-right { min-height: 140px; }
+  }
+
+  /* ─── HERO VISUAL ENHANCEMENT ─── */
+  .hero-accent-line {
+    position: absolute;
+    left: clamp(1.5rem, 6vw, 5rem);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, var(--olive-border) 40%, var(--olive-border) 60%, transparent);
+    pointer-events: none;
+  }
+
+  /* ─── VISUAL GRID BG on section ─── */
+  #work {
+    position: relative;
+  }
+  #work::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, var(--olive-light), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+  #work > * { position: relative; z-index: 1; }
+
+  /* ─── STATS BAR ENHANCED ─── */
+  .stat-item {
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: clamp(1.5rem, 6vw, 5rem);
+    width: 0;
+    height: 2px;
+    background: var(--olive);
+    transition: width 0.4s ease;
+  }
+  .stat-item:hover::after { width: calc(100% - clamp(1.5rem, 6vw, 5rem) * 2); }
+
+  /* Brands section dark BG for contrast */
+  .brands-section {
+    background: #1e2520 !important;
+    border-top: none;
+    border-bottom: none;
+  }
+  .brands-header {
+    color: rgba(251,251,250,0.35) !important;
+  }
+  .brands-header::before {
+    background: rgba(251,251,250,0.2) !important;
+  }
+  .brands-track-wrapper::before { background: linear-gradient(to right, #1e2520, transparent) !important; }
+  .brands-track-wrapper::after  { background: linear-gradient(to left,  #1e2520, transparent) !important; }
+  .brand-dot { background: rgba(251,251,250,0.15) !important; }
+  .brand-item { opacity: 0.5; filter: brightness(0) invert(1) !important; }
+  .brand-item:hover { opacity: 1; filter: brightness(0) invert(1) !important; }
 
 </style>
 </head>
@@ -827,25 +1006,51 @@
 
   <div class="works-grid">
 
-    <!-- CARD 1 — Featured -->
-    <a class="work-card featured reveal" href="https://www.notion.so/Primeiro-Dexis-Investor-Day-Sicredi-12f943d2d80780a59df4e74ff9978dc7?pvs=25" target="_blank" rel="noopener">
-      <div class="card-body">
-        <div style="display:flex;align-items:center;gap:0.75rem">
-          <span class="card-index">01</span>
-          <span class="card-tag">Evento · Institucional</span>
+    <!-- CARD FEATURED — Cocamar (premiado) -->
+    <a class="work-card featured award-card reveal" href="https://rodolfocorrea.notion.site/A-Solidariedade-a-Nossa-Energia-Cocamar-12f943d2d8078116b36bcffc1bd58f10?pvs=25" target="_blank" rel="noopener">
+      <div class="award-left">
+        <div class="award-badge">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          Projeto Premiado
         </div>
-        <h3 class="card-title">Primeiro Dexis Investor Day — Sicredi</h3>
-        <p class="card-desc">Estratégia de comunicação e produção de conteúdo para o primeiro evento institucional voltado a investidores da cooperativa Sicredi Dexis, com foco em posicionamento e credibilidade financeira.</p>
-        <div class="card-footer">
-          <span class="card-cta">Ver <span class="card-arrow">↗</span></span>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-top:1.5rem">
+          <span class="card-index" style="color:rgba(251,251,250,0.4)">01</span>
+          <span class="card-tag award-tag">Branding · Social</span>
+        </div>
+        <h3 class="card-title award-title">A Solidariedade<br>é a Nossa Energia<br><em>— Cocamar</em></h3>
+        <p class="card-desc award-desc">Campanha de posicionamento institucional para a Cocamar explorando os valores cooperativos e o impacto social da marca no agronegócio paranaense. Reconhecida como melhor campanha de branding regional.</p>
+        <div class="card-footer award-footer">
+          <span class="card-cta award-cta">Ver projeto <span class="card-arrow">↗</span></span>
+        </div>
+      </div>
+      <div class="award-right">
+        <img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar" class="award-logo">
+        <div class="award-visual-lines">
+          <div class="av-line"></div>
+          <div class="av-line"></div>
+          <div class="av-line"></div>
+          <div class="av-line"></div>
         </div>
       </div>
     </a>
 
-    <!-- CARD 2 -->
-    <a class="work-card reveal" href="https://www.notion.so/G1-Especial-Publicit-rio-130943d2d8078029ae68d080e3127eac?pvs=25" target="_blank" rel="noopener">
+    <!-- CARD 2 — Sicredi (moved from position 1) -->
+    <a class="work-card reveal" href="https://www.notion.so/Primeiro-Dexis-Investor-Day-Sicredi-12f943d2d80780a59df4e74ff9978dc7?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="card-index">02</span>
+        <span class="card-tag">Evento · Institucional</span>
+      </div>
+      <h3 class="card-title">Primeiro Dexis Investor Day — Sicredi</h3>
+      <p class="card-desc">Estratégia de comunicação e produção de conteúdo para o primeiro evento institucional voltado a investidores da cooperativa Sicredi Dexis, com foco em posicionamento e credibilidade financeira.</p>
+      <div class="card-footer">
+        <span class="card-cta">Ver <span class="card-arrow">↗</span></span>
+      </div>
+    </a>
+
+    <!-- CARD 3 -->
+    <a class="work-card reveal" href="https://www.notion.so/G1-Especial-Publicit-rio-130943d2d8078029ae68d080e3127eac?pvs=25" target="_blank" rel="noopener">
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <span class="card-index">03</span>
         <span class="card-tag">Mídia · Editorial</span>
       </div>
       <h3 class="card-title">G1 — Especial Publicitário</h3>
@@ -855,10 +1060,10 @@
       </div>
     </a>
 
-    <!-- CARD 3 -->
+    <!-- CARD 4 -->
     <a class="work-card reveal" href="https://notion.so/Trilha-do-Outbound-342943d2d8078030bc30cd1454d86084?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">03</span>
+        <span class="card-index">04</span>
         <span class="card-tag">Vendas · Estratégia</span>
       </div>
       <h3 class="card-title">Trilha do Outbound</h3>
@@ -868,18 +1073,7 @@
       </div>
     </a>
 
-    <!-- CARD 4 -->
-    <a class="work-card reveal" href="https://rodolfocorrea.notion.site/A-Solidariedade-a-Nossa-Energia-Cocamar-12f943d2d8078116b36bcffc1bd58f10?pvs=25" target="_blank" rel="noopener">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">04</span>
-        <span class="card-tag">Branding · Social</span>
-      </div>
-      <h3 class="card-title">A Solidariedade é a Nossa Energia — Cocamar</h3>
-      <p class="card-desc">Campanha de posicionamento institucional para a Cocamar explorando os valores cooperativos e o impacto social da marca no agronegócio paranaense.</p>
-      <div class="card-footer">
-        <span class="card-cta">Ver <span class="card-arrow">↗</span></span>
-      </div>
-    </a>
+
 
     <!-- CARD 5 -->
     <a class="work-card reveal" href="https://notion.so/Desenvolvimento-gil-de-Landing-Pages-Vibe-Coding-364943d2d80780068d86e70fbfdc72ba?pvs=25" target="_blank" rel="noopener">
@@ -987,16 +1181,7 @@
   <p class="footer-copy">
     <strong>Rodolfo Correa</strong> © 2026
   </p>
-  <div class="footer-links">
-    <a href="https://wa.me/5544991724857" target="_blank" rel="noopener" class="footer-link">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C3.686 1 1 3.686 1 7c0 1.03.27 2.005.738 2.85L1 13l3.255-.81A6.02 6.02 0 0 0 7 13c3.314 0 6-2.686 6-6S10.314 1 7 1Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><path d="M5 4.958c.12.3.36.96.42 1.08.06.12.06.24 0 .36-.06.06-.12.18-.24.3-.06.06-.18.18-.12.36.06.18.36.72.84 1.14.6.54 1.08.72 1.26.78.18.06.3.06.42-.06.12-.12.42-.48.54-.66.12-.18.24-.12.42-.06.18.06 1.08.54 1.26.66.18.12.3.18.36.3.06.18.06.54-.12.9-.18.36-.84.72-1.2.78-.3.06-.72.06-2.16-.54C4.5 9.24 3.5 7.84 3.44 7.78c-.06-.06-.48-.66-.48-1.26s.36-.9.48-1.02c.12-.12.24-.12.36-.12h.3Z" stroke="currentColor" stroke-width="1"/></svg>
-      (44) 99172-4857
-    </a>
-    <a href="https://linkedin.com/in/rodolffocorrea" target="_blank" rel="noopener" class="footer-link">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="1.5" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.1"/><path d="M4.5 6v4M4.5 4.5v.01M7 10V7.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5V10" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      LinkedIn
-    </a>
-  </div>
+
 </footer>
 
 <script>
