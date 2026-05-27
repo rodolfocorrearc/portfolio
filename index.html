@@ -101,7 +101,6 @@
     50% { opacity: 0.5; transform: scale(0.8); }
   }
 
-  /* ─── HERO (single column, sem foto) ─── */
   .hero {
     min-height: 100svh;
     display: flex;
@@ -448,7 +447,127 @@
 
   .work-card:hover .card-arrow { transform: translate(3px, -3px); }
 
-  /* ─── FEATURED CARD ─── */
+  /* ─── FEATURED CARD (B2B — super destaque) ─── */
+  .work-card.featured-b2b {
+    grid-column: 1 / -1;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0800 100%);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 40px rgba(255,59,0,0.15);
+  }
+
+  .work-card.featured-b2b:hover {
+    box-shadow: 0 0 60px rgba(255,59,0,0.3);
+    transform: translateY(-4px);
+  }
+
+  .b2b-left {
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .b2b-super-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #000;
+    background: var(--accent);
+    padding: 0.4rem 1rem;
+    width: fit-content;
+    border-radius: 2px;
+  }
+
+  .b2b-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .b2b-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .b2b-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    font-weight: 300;
+    max-width: 44ch;
+  }
+
+  .b2b-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background: rgba(255,59,0,0.06);
+    border-left: 1px solid var(--accent-border);
+    overflow: hidden;
+    padding: 3.5rem;
+  }
+
+  .b2b-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 50%, rgba(255,59,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .b2b-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .b2b-metric-number {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .b2b-metric-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .b2b-divider {
+    width: 1px;
+    height: 3rem;
+    background: var(--accent-border);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── FEATURED CARD (Cocamar — destaque secundário) ─── */
   .work-card.featured {
     grid-column: 1 / -1;
     display: grid !important;
@@ -706,6 +825,9 @@
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
     .hero { padding-top: 6rem; }
+    .work-card.featured-b2b { grid-template-columns: 1fr; }
+    .b2b-right { border-left: none; border-top: 1px solid var(--accent-border); min-height: 200px; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .b2b-divider { width: 3rem; height: 1px; }
     .work-card.featured { grid-template-columns: 1fr; }
     .award-right { min-height: 200px; border-left: none; border-top: 1px solid var(--ink-xsoft); }
     .contact-strip-inner { flex-direction: column; align-items: flex-start; text-align: left; }
@@ -731,10 +853,7 @@
   <div class="nav-right">
     <a href="#work" class="nav-link">Projetos</a>
     <a href="#contact" class="nav-link">Contato</a>
-    <div class="nav-available">
-      <div class="nav-available-dot"></div>
-      Disponível
-    </div>
+
   </div>
 </nav>
 
@@ -780,7 +899,7 @@
 
 <div class="stats-bar">
   <div class="stat-item">
-    <span class="stat-number">10+</span>
+    <span class="stat-number">11+</span>
     <span class="stat-label">Projetos Documentados</span>
   </div>
   <div class="stat-item">
@@ -823,27 +942,42 @@
 
   <div class="works-grid">
 
-    <a class="work-card featured reveal" href="https://rodolfocorrea.notion.site/A-Solidariedade-a-Nossa-Energia-Cocamar-12f943d2d8078116b36bcffc1bd58f10?pvs=25" target="_blank" rel="noopener">
-      <div class="award-left">
-        <div class="award-badge">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="margin-right: 4px;"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          Projeto Premiado
+    <!-- #01 — NOVO: B2B Super Featured -->
+    <a class="work-card featured-b2b reveal" href="https://www.notion.so/rodolfocorrea/Estrat-gia-de-Aquisi-o-B2B-venda-R-30-mil-Software-House-36d943d2d80780749521d9a9f96531bc?v=12f943d2d80781288bb8000c7a8b241d&source=copy_link" target="_blank" rel="noopener">
+      <div class="b2b-left">
+        <div class="b2b-super-badge">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          Case de Resultado
         </div>
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-top:2rem">
-          <span class="card-index">01</span>
-          <span class="card-tag">Branding · Social</span>
+        <div style="display:flex;align-items:center;gap:0.75rem">
+          <span class="card-index" style="color:rgba(255,59,0,0.5)">01</span>
+          <span class="card-tag">B2B · Vendas · Estratégia</span>
         </div>
-        <h3 class="card-title award-title">A Solidariedade<br>é a Nossa Energia<br><em>— Cocamar</em></h3>
-        <p class="card-desc">Entrega de sistemas de energia fotovoltaica para 17 entidades assistenciais dos estados do Paraná, São Paulo e Mato Grosso do Sul, em 2023.</p>
-        <div class="card-footer">
+        <h2 class="b2b-title">Estratégia de<br>Aquisição <em>B2B</em><br>— Software House</h2>
+        <p class="b2b-desc">Estruturação completa de uma estratégia de aquisição B2B que gerou uma venda de R$ 30 mil para uma Software House.</p>
+        <div class="card-footer" style="border-top-color:var(--accent-border);margin-top:0.5rem">
           <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
         </div>
       </div>
-      <div class="award-right">
-        <img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar" class="award-logo">
+      <div class="b2b-right">
+        <div class="b2b-metric">
+          <span class="b2b-metric-number">R$30k</span>
+          <span class="b2b-metric-label">Venda Gerada</span>
+        </div>
+        <div class="b2b-divider"></div>
+        <div class="b2b-metric">
+          <span class="b2b-metric-number">B2B</span>
+          <span class="b2b-metric-label">Software House</span>
+        </div>
+        <div class="b2b-divider"></div>
+        <div class="b2b-metric">
+          <span class="b2b-metric-number">360°</span>
+          <span class="b2b-metric-label">Estratégia Completa</span>
+        </div>
       </div>
     </a>
 
+    <!-- #02 — Sicredi Investor Day -->
     <a class="work-card reveal" href="https://www.notion.so/Primeiro-Dexis-Investor-Day-Sicredi-12f943d2d80780a59df4e74ff9978dc7?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="card-index">02</span>
@@ -856,9 +990,27 @@
       </div>
     </a>
 
-    <a class="work-card reveal" href="https://www.notion.so/G1-Especial-Publicit-rio-130943d2d8078029ae68d080e3127eac?pvs=25" target="_blank" rel="noopener">
+    <!-- #03 — Cocamar (antes era destaque, agora card comum) -->
+    <a class="work-card reveal" href="https://rodolfocorrea.notion.site/A-Solidariedade-a-Nossa-Energia-Cocamar-12f943d2d8078116b36bcffc1bd58f10?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="card-index">03</span>
+        <span class="card-tag">Branding · Social</span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#FFB300;background:rgba(255,179,0,0.1);padding:0.2rem 0.6rem;border:1px solid rgba(255,179,0,0.3);border-radius:20px;width:fit-content">
+        <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Premiado
+      </div>
+      <h3 class="card-title">A Solidariedade é a Nossa Energia — Cocamar</h3>
+      <p class="card-desc">Entrega de sistemas de energia fotovoltaica para 17 entidades assistenciais dos estados do Paraná, São Paulo e Mato Grosso do Sul, em 2023.</p>
+      <div class="card-footer">
+        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
+      </div>
+    </a>
+
+    <!-- #04 — G1 Especial -->
+    <a class="work-card reveal" href="https://www.notion.so/G1-Especial-Publicit-rio-130943d2d8078029ae68d080e3127eac?pvs=25" target="_blank" rel="noopener">
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <span class="card-index">04</span>
         <span class="card-tag">Mídia · Editorial</span>
       </div>
       <h3 class="card-title">G1 — Especial Publicitário</h3>
@@ -868,9 +1020,10 @@
       </div>
     </a>
 
+    <!-- #05 — Trilha do Outbound -->
     <a class="work-card reveal" href="https://notion.so/Trilha-do-Outbound-342943d2d8078030bc30cd1454d86084?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">04</span>
+        <span class="card-index">05</span>
         <span class="card-tag">Vendas · Estratégia</span>
       </div>
       <h3 class="card-title">Trilha do Outbound</h3>
@@ -880,9 +1033,10 @@
       </div>
     </a>
 
+    <!-- #06 — Vibe Coding -->
     <a class="work-card reveal" href="https://notion.so/Desenvolvimento-gil-de-Landing-Pages-Vibe-Coding-364943d2d80780068d86e70fbfdc72ba?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">05</span>
+        <span class="card-index">06</span>
         <span class="card-tag">Tech · Produto</span>
       </div>
       <h3 class="card-title">Desenvolvimento Ágil de Landing Pages — Vibe Coding</h3>
@@ -892,9 +1046,10 @@
       </div>
     </a>
 
+    <!-- #07 — Gume Inteligência -->
     <a class="work-card reveal" href="https://www.notion.so/Social-Instagram-Gume-Intelig-ncia-364943d2d807803fb6b7e81a3c5baf97?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">06</span>
+        <span class="card-index">07</span>
         <span class="card-tag">Social Media</span>
       </div>
       <h3 class="card-title">Social Instagram — Gume Inteligência</h3>
@@ -904,9 +1059,10 @@
       </div>
     </a>
 
+    <!-- #08 — RPC Globo -->
     <a class="work-card reveal" href="https://www.notion.so/RPC-Afiliada-TV-Globo-12f943d2d80780a79d36e43393121b6a?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">07</span>
+        <span class="card-index">08</span>
         <span class="card-tag">TV · Audiovisual</span>
       </div>
       <h3 class="card-title">RPC — Afiliada TV Globo</h3>
@@ -916,9 +1072,10 @@
       </div>
     </a>
 
+    <!-- #09 — Nova Sede Sicredi -->
     <a class="work-card reveal" href="https://www.notion.so/Nova-Sede-Sicredi-Dexis-12f943d2d80780cea7d3e82dd392dd5f?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">08</span>
+        <span class="card-index">09</span>
         <span class="card-tag">Institucional</span>
       </div>
       <h3 class="card-title">Nova Sede — Sicredi Dexis</h3>
@@ -928,9 +1085,10 @@
       </div>
     </a>
 
+    <!-- #10 — Mega Outlet -->
     <a class="work-card reveal" href="https://www.notion.so/Mega-Outlet-2024-12f943d2d8078044a840c3e685d400e3?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">09</span>
+        <span class="card-index">10</span>
         <span class="card-tag">Varejo · Evento</span>
       </div>
       <h3 class="card-title">Mega Outlet 2024</h3>
@@ -940,9 +1098,10 @@
       </div>
     </a>
 
+    <!-- #11 — Audiovisuais -->
     <a class="work-card reveal" href="https://www.notion.so/Audiovisuais-1b6943d2d80780f7ab9cede2959f9c26?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">10</span>
+        <span class="card-index">11</span>
         <span class="card-tag">Vídeo · Produção</span>
       </div>
       <h3 class="card-title">Audiovisuais</h3>
