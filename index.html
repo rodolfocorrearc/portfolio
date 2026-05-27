@@ -79,28 +79,6 @@
 
   .nav-link:hover { color: var(--accent); }
 
-  .nav-available {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #4CAF50;
-    letter-spacing: 0.06em;
-  }
-
-  .nav-available-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #4CAF50;
-    animation: pulse-dot 2s infinite;
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
   .hero {
     min-height: 100svh;
     display: flex;
@@ -259,7 +237,6 @@
 
   .hero-footnote-dot { color: var(--accent-border); }
 
-  /* ─── STATS BAR ─── */
   .stats-bar {
     display: flex;
     align-items: stretch;
@@ -308,7 +285,6 @@
     color: var(--ink-soft);
   }
 
-  /* ─── SECTION SHARED ─── */
   section { padding: var(--gap) clamp(1.5rem, 6vw, 5rem); }
 
   .section-header {
@@ -348,7 +324,6 @@
     margin-top: 0.5rem;
   }
 
-  /* ─── WORKS GRID ─── */
   .works-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
@@ -447,7 +422,7 @@
 
   .work-card:hover .card-arrow { transform: translate(3px, -3px); }
 
-  /* ─── FEATURED CARD (B2B — super destaque) ─── */
+  /* ─── FEATURED CARD (B2B) ─── */
   .work-card.featured-b2b {
     grid-column: 1 / -1;
     display: grid !important;
@@ -566,71 +541,6 @@
     position: relative;
     z-index: 1;
   }
-
-  /* ─── FEATURED CARD (Cocamar — destaque secundário) ─── */
-  .work-card.featured {
-    grid-column: 1 / -1;
-    display: grid !important;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 0;
-    padding: 0;
-    overflow: hidden;
-    background: #000;
-    border: 1px solid var(--ink-xsoft);
-  }
-
-  .work-card.featured:hover { border-color: var(--accent); }
-
-  .award-left {
-    padding: 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .award-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #000;
-    background: var(--accent);
-    padding: 0.35rem 0.85rem;
-    width: fit-content;
-    border-radius: 2px;
-  }
-
-  .award-title {
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
-    margin-top: 1.5rem;
-  }
-
-  .award-right {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #111;
-    border-left: 1px solid var(--ink-xsoft);
-    overflow: hidden;
-    padding: 3rem;
-  }
-
-  .award-logo {
-    width: 60%;
-    max-width: 220px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.9;
-    position: relative;
-    z-index: 2;
-    transition: transform 0.4s ease;
-  }
-
-  .work-card.featured:hover .award-logo { transform: scale(1.05); }
 
   /* ─── BRANDS CAROUSEL ─── */
   .brands-section {
@@ -778,7 +688,6 @@
     color: #0A66C2;
   }
 
-  /* ─── FOOTER ─── */
   footer {
     display: flex;
     align-items: center;
@@ -800,7 +709,6 @@
     color: var(--ink);
   }
 
-  /* ─── ANIMATIONS ─── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -822,14 +730,11 @@
     transform: none;
   }
 
-  /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
     .hero { padding-top: 6rem; }
     .work-card.featured-b2b { grid-template-columns: 1fr; }
     .b2b-right { border-left: none; border-top: 1px solid var(--accent-border); min-height: 200px; flex-direction: row; flex-wrap: wrap; justify-content: center; }
     .b2b-divider { width: 3rem; height: 1px; }
-    .work-card.featured { grid-template-columns: 1fr; }
-    .award-right { min-height: 200px; border-left: none; border-top: 1px solid var(--ink-xsoft); }
     .contact-strip-inner { flex-direction: column; align-items: flex-start; text-align: left; }
   }
 
@@ -853,14 +758,12 @@
   <div class="nav-right">
     <a href="#work" class="nav-link">Projetos</a>
     <a href="#contact" class="nav-link">Contato</a>
-
   </div>
 </nav>
 
 <div class="hero">
   <div class="hero-text">
     <span class="hero-eyebrow">Portfólio · 2026</span>
-
     <div class="hero-name-block">
       <span class="hero-name-label">Olá, sou o</span>
       <h1 class="hero-headline">
@@ -868,11 +771,9 @@
         <em>Correa.</em>
       </h1>
     </div>
-
     <p class="hero-bio">
       Analista de comunicação e marketing com experiência em projetos editoriais, branding e estratégias de inbound e outbound. Passei por rádio e TV e cheguei à estratégia digital. Combino visão analítica com escrita persuasiva para gerar resultados reais.
     </p>
-
     <div class="hero-tags">
       <span class="hero-tag">Branding</span>
       <span class="hero-tag">Inbound</span>
@@ -880,7 +781,6 @@
       <span class="hero-tag">Audiovisual</span>
       <span class="hero-tag">Social Media</span>
     </div>
-
     <div class="hero-cta">
       <a href="#work" class="btn-primary">
         Ver Trabalhos
@@ -888,7 +788,6 @@
       </a>
       <a href="#contact" class="btn-secondary">Falar comigo →</a>
     </div>
-
     <div class="hero-footnote">
       <span>Maringá · PR</span>
       <span class="hero-footnote-dot">·</span>
@@ -899,7 +798,7 @@
 
 <div class="stats-bar">
   <div class="stat-item">
-    <span class="stat-number">11+</span>
+    <span class="stat-number">10+</span>
     <span class="stat-label">Projetos Documentados</span>
   </div>
   <div class="stat-item">
@@ -942,7 +841,7 @@
 
   <div class="works-grid">
 
-    <!-- #01 — NOVO: B2B Super Featured -->
+    <!-- #01 — B2B Super Featured -->
     <a class="work-card featured-b2b reveal" href="https://www.notion.so/rodolfocorrea/Estrat-gia-de-Aquisi-o-B2B-venda-R-30-mil-Software-House-36d943d2d80780749521d9a9f96531bc?v=12f943d2d80781288bb8000c7a8b241d&source=copy_link" target="_blank" rel="noopener">
       <div class="b2b-left">
         <div class="b2b-super-badge">
@@ -990,7 +889,7 @@
       </div>
     </a>
 
-    <!-- #03 — Cocamar (antes era destaque, agora card comum) -->
+    <!-- #03 — Cocamar -->
     <a class="work-card reveal" href="https://rodolfocorrea.notion.site/A-Solidariedade-a-Nossa-Energia-Cocamar-12f943d2d8078116b36bcffc1bd58f10?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="card-index">03</span>
@@ -1039,19 +938,17 @@
         <span class="card-index">06</span>
         <span class="card-tag">Tech · Produto</span>
       </div>
-      <h3 class="card-title"> Landing Pages via Vibe Coding</h3>
+      <h3 class="card-title">Desenvolvimento Ágil de Landing Pages — Vibe Coding</h3>
       <p class="card-desc">Metodologia de desenvolvimento acelerado de landing pages usando vibe coding, com foco em velocidade de entrega, conversão e prototipagem orientada a resultado.</p>
       <div class="card-footer">
         <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
-      </div>
-    </a>
       </div>
     </a>
 
     <!-- #07 — RPC Globo -->
     <a class="work-card reveal" href="https://www.notion.so/RPC-Afiliada-TV-Globo-12f943d2d80780a79d36e43393121b6a?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">08</span>
+        <span class="card-index">07</span>
         <span class="card-tag">TV · Audiovisual</span>
       </div>
       <h3 class="card-title">RPC — Afiliada TV Globo</h3>
@@ -1064,7 +961,7 @@
     <!-- #08 — Nova Sede Sicredi -->
     <a class="work-card reveal" href="https://www.notion.so/Nova-Sede-Sicredi-Dexis-12f943d2d80780cea7d3e82dd392dd5f?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">09</span>
+        <span class="card-index">08</span>
         <span class="card-tag">Institucional</span>
       </div>
       <h3 class="card-title">Nova Sede — Sicredi Dexis</h3>
@@ -1077,7 +974,7 @@
     <!-- #09 — Mega Outlet -->
     <a class="work-card reveal" href="https://www.notion.so/Mega-Outlet-2024-12f943d2d8078044a840c3e685d400e3?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">10</span>
+        <span class="card-index">09</span>
         <span class="card-tag">Varejo · Evento</span>
       </div>
       <h3 class="card-title">Mega Outlet 2024</h3>
@@ -1090,7 +987,7 @@
     <!-- #10 — Audiovisuais -->
     <a class="work-card reveal" href="https://www.notion.so/Audiovisuais-1b6943d2d80780f7ab9cede2959f9c26?pvs=25" target="_blank" rel="noopener">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">11</span>
+        <span class="card-index">10</span>
         <span class="card-tag">Vídeo · Produção</span>
       </div>
       <h3 class="card-title">Audiovisuais</h3>
@@ -1109,7 +1006,6 @@
       <span class="contact-eyebrow">Vamos conversar?</span>
       <h2 class="contact-headline">Pronto para o<br>próximo passo.</h2>
     </div>
-    
     <div class="contact-actions">
       <a href="https://wa.me/5544991724857" target="_blank" rel="noopener" class="contact-btn contact-btn--whatsapp">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -1117,7 +1013,6 @@
         </svg>
         WhatsApp
       </a>
-      
       <a href="https://linkedin.com/in/rodolffocorrea" target="_blank" rel="noopener" class="contact-btn contact-btn--linkedin">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
