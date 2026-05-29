@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rodolfo Correa — Estrategista de Aquisição e Conteúdo · Copywriter</title>
+<title>Rodolfo Correa — Comunicólogo · Analista de Marketing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -208,13 +208,20 @@ nav {
 }
 
 .hero-funnel {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  align-items: center;
-  font-size: 0.9rem;
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
   font-weight: 600;
   color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.hero-funnel strong {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.funnel-highlight {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .funnel-dot { color: var(--accent); font-weight: 800; }
@@ -228,9 +235,9 @@ nav {
   font-weight: 500;
 }
 
-/* ─── BRANDS BRUTALIST RUNNER ─── */
+/* ─── BRANDS RUNNER (LOGOS AMPLIADAS) ─── */
 .brands-section {
-  padding: 4rem clamp(1.5rem, 6vw, 6rem);
+  padding: 5rem clamp(1.5rem, 6vw, 6rem);
   border-bottom: 1px solid var(--ink-xsoft);
   background: #F4F4F0;
 }
@@ -241,7 +248,7 @@ nav {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .brands-track-wrapper {
@@ -253,7 +260,7 @@ nav {
 .brands-track {
   display: flex;
   align-items: center;
-  gap: 8rem;
+  gap: 9rem; /* Espaçamento proporcional ao novo tamanho */
   width: max-content;
   animation: scrollBrands 25s linear infinite;
 }
@@ -264,12 +271,16 @@ nav {
 }
 
 .brand-item {
-  height: 45px;
-  filter: grayscale(1) contrast(1.5) opacity(0.7);
-  transition: filter 0.3s ease;
+  height: 65px; /* Tamanho ampliado estilo Ana Couto */
+  filter: grayscale(1) contrast(1.4) opacity(0.75);
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-.brand-item:hover { filter: none; }
+.brand-item:hover { 
+  filter: none; 
+  transform: scale(1.03);
+}
+
 .brand-item img { height: 100%; width: auto; object-fit: contain; }
 
 /* ─── WORK MURAL (ESTILO PORTFÓLIO ESTRATÉGICO) ─── */
@@ -500,7 +511,7 @@ section { padding: var(--gap) clamp(1.5rem, 6vw, 6rem); }
   -webkit-backdrop-filter: blur(15px);
   z-index: 1000;
   align-items: center;
-  justify-content: flex-end; /* Abre como painel lateral sofisticado */
+  justify-content: flex-end;
 }
 
 .modal-overlay.active { display: flex; }
@@ -713,6 +724,8 @@ footer {
     padding-left: 0;
     padding-top: 3rem;
   }
+  .brand-item { height: 50px; } /* Adaptável em telas menores */
+  .brands-track { gap: 5rem; }
 }
 
 @media (max-width: 600px) {
@@ -743,7 +756,7 @@ footer {
     <div class="hero-left">
       <span class="hero-eyebrow">Portfólio · 2026</span>
       <h1 class="hero-headline">Rodolfo<br>Correa<em>.</em></h1>
-      <p class="hero-subtitle"><strong>Estrategista de Aquisição e Conteúdo · Copywriter</strong></p>
+      <p class="hero-subtitle"><strong>Comunicólogo · Analista de Marketing</strong></p>
       <div class="hero-cta">
         <a href="#work" class="btn-primary">
           Ver Projetos
@@ -755,13 +768,10 @@ footer {
     
     <div class="hero-right">
       <div class="hero-funnel">
-        <span>Experiência nas 3 etapas do Funil</span>
-        <span class="funnel-dot">·</span>
-        <span>Atração</span>
-        <span class="funnel-dot">·</span>
-        <span>Interesse</span>
-        <span class="funnel-dot">·</span>
-        <span>Conversão</span>
+        <strong>Experiência nas 3 etapas do Funil:</strong><br>
+        <span class="funnel-highlight">Atração</span> <span class="funnel-dot">·</span> 
+        <span class="funnel-highlight">Interesse</span> <span class="funnel-dot">·</span> 
+        <span class="funnel-highlight">Conversão</span>
       </div>
       
       <div style="display:flex; flex-direction:column; gap:1.5rem;">
@@ -792,6 +802,7 @@ footer {
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/SICREDI.png" alt="Sicredi"></div>
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar"></div>
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/Acim.png" alt="Acim"></div>
+      <!-- Duplicados para o efeito infinito contínuo -->
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/rpc-globo.png" alt="RPC Globo"></div>
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/SICREDI.png" alt="Sicredi"></div>
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar"></div>
@@ -942,7 +953,7 @@ footer {
   <p class="footer-copy"><strong>Rodolfo Correa</strong> &copy; 2026</p>
 </footer>
 
-<!-- MODALS (PAINÉIS LATERAIS ESTRUTURADOS) -->
+<!-- MODALS -->
 <div class="modal-overlay" id="modal-b2b" onclick="closeModalOnOverlay(event, 'modal-b2b')">
   <div class="modal-box">
     <div class="modal-header">
@@ -967,7 +978,7 @@ footer {
       <div class="highlight-box">
         <strong>Primeira Venda em 15 Dias:</strong> Logo nas duas primeiras semanas de campanha, captamos um lead qualificado vindo de Belém do Pará. O contato evoluiu rapidamente para a mesa de negociação, resultando no fechamento de um contrato de mais de R$ 30 mil. Este marco representou a primeira venda da software house originada 100% via canais de marketing.
       </div>
-      <p><strong>Expansão para Eventos Nacionais:</strong> Utilizando os dados de tração inicial, mapeei oportunidades presenciais e identificamos a Feira do Empreendedor do SEBRAE em São Paulo (2025) como o palco ideal. Em tempo recorde, estruturamos a operação interna e o material de vendas para expor e escalar o novo serviço no maior evento de empreendedorismo do país.</p>
+      <p><strong>Expansão para Eventos Nacionais:</strong> Utilizando os dados de tração inicial, mapeei oportunidades presenciais e identificamos a Feira do Empreendedor do SEBRAE em São Paulo (2025) como o palco ideal. Em tempo recorde, estruturamos a operation interna e o material de vendas para expor e escalar o novo serviço no maior evento de empreendedorismo do país.</p>
       <h3>O Impacto Atual</h3>
       <p>O que começou como um teste de validação de mercado transformou-se na principal engrenagem de crescimento da empresa. Hoje, o serviço de Desenvolvimento com IA é o principal carro-chefe da software house, provando que o alinhamento entre posicionamento de mercado, produto certo e canais de aquisição eficientes é a chave para destravar o crescimento de empresas de tecnologia.</p>
       <p>🔗 <a href="https://lughy.com.br" target="_blank" rel="noopener">Conheça o projeto atual: Lughy — Desenvolvimento com IA</a></p>
@@ -1044,7 +1055,7 @@ footer {
       <h3>Prepara RPC 2019</h3>
       <p><a href="https://globoplay.globo.com/v/8028342/" target="_blank" rel="noopener">Aulão de revisão para o Vestibular da UEL...</a></p>
       <h3>Cantata de Natal RPC</h3>
-      <p><a href="https://globoplay.globo.com/v/8143235/" target="_blank" rel="noopener">Evento realizado no 'Zerão', em Londrina/PR</a></p>
+      <p><a href="https://globoplay.globo.com/v/8143235/" target="_blank" rel="noopener">Evento realizado no 'Zerão', em Lonrina/PR</a></p>
       <h3>Numerologia de Ana Maria Braga</h3>
       <p><a href="https://globoplay.globo.com/v/8202687/" target="_blank" rel="noopener">Matéria gravada em Londrina/PR pela equipe local</a></p>
       <h3>Nosso Amor na RPC</h3>
