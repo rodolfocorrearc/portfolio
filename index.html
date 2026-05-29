@@ -39,24 +39,13 @@ nav {
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end; /* Alinhado à direita devido à remoção do brand */
   padding: 2rem clamp(1.5rem, 6vw, 6rem);
   background: rgba(252, 252, 250, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--ink-xsoft);
 }
-
-.nav-brand {
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.nav-brand span { color: var(--accent); }
 
 .nav-right { display: flex; align-items: center; gap: 3rem; }
 
@@ -82,12 +71,12 @@ nav {
 .nav-link:hover { color: var(--ink); }
 .nav-link:hover::after { width: 100%; }
 
-/* ─── HERO (DIAGRAMAÇÃO EDITORIAL) ─── */
+/* ─── HERO (DIAGRAMAÇÃO EDITORIAL ATUALIZADA) ─── */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 10rem clamp(1.5rem, 6vw, 6rem) 6rem;
+  padding: 12rem clamp(1.5rem, 6vw, 6rem) 6rem;
   border-bottom: 1px solid var(--ink);
 }
 
@@ -104,21 +93,13 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2.5rem;
-}
-
-.hero-eyebrow {
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
+  gap: 3.5rem; /* Aumento de respiro estrutural */
 }
 
 .hero-headline {
-  font-size: clamp(3.5rem, 7.5vw, 7.5rem);
+  font-size: clamp(3.5rem, 7vw, 7rem);
   font-weight: 800;
-  line-height: 0.95;
+  line-height: 1.0;
   letter-spacing: -0.04em;
   color: var(--ink);
 }
@@ -129,24 +110,26 @@ nav {
 }
 
 .hero-subtitle {
-  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-  font-weight: 500;
+  font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+  font-weight: 400;
   color: var(--ink-soft);
-  line-height: 1.4;
-  max-width: 32ch;
+  line-height: 1.3;
+  max-width: 28ch;
   letter-spacing: -0.02em;
+  border-left: 3px solid var(--accent);
+  padding-left: 1.5rem;
 }
 
 .hero-subtitle strong {
   color: var(--ink);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .hero-cta {
   display: flex;
   align-items: center;
   gap: 2rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .btn-primary {
@@ -189,7 +172,58 @@ nav {
   justify-content: space-between;
   border-left: 1px solid var(--ink-xsoft);
   padding-left: 4rem;
-  gap: 3rem;
+  gap: 3.5rem;
+}
+
+/* NOVO DESIGN DO FUNIL (DIAGRAMAÇÃO ASSIMÉTRICA) */
+.hero-funnel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hero-funnel-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.hero-funnel-badge {
+  background: #F4F4F0;
+  border: 1px solid var(--ink-xsoft);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: fit-content;
+  min-width: 280px;
+}
+
+.funnel-stage {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.funnel-stage.active {
+  color: var(--ink);
+}
+
+.funnel-indicator {
+  width: 6px;
+  height: 6px;
+  background: var(--ink-xsoft);
+  border-radius: 50%;
+}
+
+.funnel-stage.active .funnel-indicator {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-light);
 }
 
 .hero-meta-row {
@@ -205,23 +239,6 @@ nav {
   color: var(--ink);
   display: block;
   margin-bottom: 0.75rem;
-}
-
-.hero-funnel {
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
-  font-weight: 600;
-  color: var(--ink-soft);
-  line-height: 1.5;
-}
-
-.hero-funnel strong {
-  color: var(--ink);
-  font-weight: 800;
-}
-
-.funnel-highlight {
-  color: var(--accent);
-  font-weight: 700;
 }
 
 .funnel-dot { color: var(--accent); font-weight: 800; }
@@ -260,7 +277,7 @@ nav {
 .brands-track {
   display: flex;
   align-items: center;
-  gap: 9rem; /* Espaçamento proporcional ao novo tamanho */
+  gap: 9rem;
   width: max-content;
   animation: scrollBrands 25s linear infinite;
 }
@@ -271,7 +288,7 @@ nav {
 }
 
 .brand-item {
-  height: 65px; /* Tamanho ampliado estilo Ana Couto */
+  height: 65px;
   filter: grayscale(1) contrast(1.4) opacity(0.75);
   transition: filter 0.3s ease, transform 0.3s ease;
 }
@@ -724,7 +741,7 @@ footer {
     padding-left: 0;
     padding-top: 3rem;
   }
-  .brand-item { height: 50px; } /* Adaptável em telas menores */
+  .brand-item { height: 50px; }
   .brands-track { gap: 5rem; }
 }
 
@@ -744,7 +761,6 @@ footer {
 <body>
 
 <nav>
-  <a href="#" class="nav-brand">Rodolfo<span>.</span></a>
   <div class="nav-right">
     <a href="#work" class="nav-link">Projetos</a>
     <a href="#contact" class="nav-link">Contato</a>
@@ -754,7 +770,6 @@ footer {
 <div class="hero">
   <div class="hero-grid">
     <div class="hero-left">
-      <span class="hero-eyebrow">Portfólio · 2026</span>
       <h1 class="hero-headline">Rodolfo<br>Correa<em>.</em></h1>
       <p class="hero-subtitle"><strong>Comunicólogo · Analista de Marketing</strong></p>
       <div class="hero-cta">
@@ -767,11 +782,23 @@ footer {
     </div>
     
     <div class="hero-right">
-      <div class="hero-funnel">
-        <strong>Experiência nas 3 etapas do Funil:</strong><br>
-        <span class="funnel-highlight">Atração</span> <span class="funnel-dot">·</span> 
-        <span class="funnel-highlight">Interesse</span> <span class="funnel-dot">·</span> 
-        <span class="funnel-highlight">Conversão</span>
+      <!-- DIAGRAMAÇÃO DO FUNIL OTIMIZADA COMO EM REVIEWS DE BRANDING -->
+      <div class="hero-funnel-container">
+        <span class="hero-funnel-title">Atuação Estratégica</span>
+        <div class="hero-funnel-badge">
+          <div class="funnel-stage active">
+            <span class="funnel-indicator"></span>
+            <span>Atração</span>
+          </div>
+          <div class="funnel-stage active">
+            <span class="funnel-indicator"></span>
+            <span>Interesse</span>
+          </div>
+          <div class="funnel-stage active">
+            <span class="funnel-indicator"></span>
+            <span>Conversão</span>
+          </div>
+        </div>
       </div>
       
       <div style="display:flex; flex-direction:column; gap:1.5rem;">
@@ -802,7 +829,6 @@ footer {
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/SICREDI.png" alt="Sicredi"></div>
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar"></div>
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/Acim.png" alt="Acim"></div>
-      <!-- Duplicados para o efeito infinito contínuo -->
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/rpc-globo.png" alt="RPC Globo"></div>
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/SICREDI.png" alt="Sicredi"></div>
       <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar"></div>
@@ -978,7 +1004,7 @@ footer {
       <div class="highlight-box">
         <strong>Primeira Venda em 15 Dias:</strong> Logo nas duas primeiras semanas de campanha, captamos um lead qualificado vindo de Belém do Pará. O contato evoluiu rapidamente para a mesa de negociação, resultando no fechamento de um contrato de mais de R$ 30 mil. Este marco representou a primeira venda da software house originada 100% via canais de marketing.
       </div>
-      <p><strong>Expansão para Eventos Nacionais:</strong> Utilizando os dados de tração inicial, mapeei oportunidades presenciais e identificamos a Feira do Empreendedor do SEBRAE em São Paulo (2025) como o palco ideal. Em tempo recorde, estruturamos a operation interna e o material de vendas para expor e escalar o novo serviço no maior evento de empreendedorismo do país.</p>
+      <p><strong>Expansão para Eventos Nacionais:</strong> Utilizando os dados de tração inicial, mapeei oportunidades presenciais e identificamos a Feira do Empreendedor do SEBRAE em São Paulo (2025) como o palco ideal. Em tempo recorde, estruturamos a operação interna e o material de vendas para expor e escalar o novo serviço no maior evento de empreendedorismo do país.</p>
       <h3>O Impacto Atual</h3>
       <p>O que começou como um teste de validação de mercado transformou-se na principal engrenagem de crescimento da empresa. Hoje, o serviço de Desenvolvimento com IA é o principal carro-chefe da software house, provando que o alinhamento entre posicionamento de mercado, produto certo e canais de aquisição eficientes é a chave para destravar o crescimento de empresas de tecnologia.</p>
       <p>🔗 <a href="https://lughy.com.br" target="_blank" rel="noopener">Conheça o projeto atual: Lughy — Desenvolvimento com IA</a></p>
@@ -1055,11 +1081,11 @@ footer {
       <h3>Prepara RPC 2019</h3>
       <p><a href="https://globoplay.globo.com/v/8028342/" target="_blank" rel="noopener">Aulão de revisão para o Vestibular da UEL...</a></p>
       <h3>Cantata de Natal RPC</h3>
-      <p><a href="https://globoplay.globo.com/v/8143235/" target="_blank" rel="noopener">Evento realizado no 'Zerão', em Lonrina/PR</a></p>
+      <p><a href="https://globoplay.globo.com/v/8143235/" target="_blank" rel="noopener">Evento realizado no 'Zerão', em Londrina/PR</a></p>
       <h3>Numerologia de Ana Maria Braga</h3>
       <p><a href="https://globoplay.globo.com/v/8202687/" target="_blank" rel="noopener">Matéria gravada em Londrina/PR pela equipe local</a></p>
       <h3>Nosso Amor na RPC</h3>
-      <p>Em 2020, atuei na organização da ação "Nosso Amor na RPC", um projeto desafiador desenvolvido em meio à pandemia. A iniciativa projetou mensagens de amor em prédios de Curitiba, Foz do Iguaçu, Cascavel, Maringá, Ponta Grossa e Londrina durante o mês de junho.</p>
+      <p>Em 2020, atuei na organização da ação "Nosso Amor na RPC", um projeto desafiador desenvolvido em meio à pandemia. A iniciativa projetou mensagens de amor em prédio de Curitiba, Foz do Iguaçu, Cascavel, Maringá, Ponta Grossa e Londrina durante o mês de junho.</p>
       <p>Em Londrina, integrei o time responsável por executar a ação na cidade, com as seguintes tarefas:</p>
       <ul>
         <li>Curadoria de influenciadores para potencializar o impacto</li>
@@ -1133,7 +1159,7 @@ footer {
         <li><strong>Estratégia de Posicionamento:</strong> Transição de público do universo infantil para um conceito sóbrio, clean e focado na elegância masculina, influenciando desde a curadoria dos produtos até a atmosfera física da loja.</li>
         <li><strong>Experiência do Cliente (CX):</strong> Planejamento de um formato diferenciado de atendimento na loja física, desenhado para tornar a jornada de decisão do homem mais fluida e confortável.</li>
         <li><strong>Treinamento de Equipe:</strong> Alinhamento estratégico e capacitação do time de vendas para garantir que a nova promessa da marca fosse entregue com consistência em cada ponto de contato.</li>
-        <li><strong>Estratégia de Lançamento e Co-branding:</strong> Planejamento do evento de inauguração e estruturação de ações de collab com marcas locais que compartilham o mesmo público-alvo.</li>
+        <li><strong>Estratégia de Lançamento e Co-branding:</strong> Planejamento do evento de lançamento e estruturação de ações de collab com marcas locais que compartilham o mesmo público-alvo.</li>
       </ul>
       <h3>O Resultado</h3>
       <p>A parceria com a Gume resultou no nascimento da Domen Store, um novo marco de elegância e atitude para a moda masculina em Arapongas. Com uma presença imponente e uma proposta de valor clara, a marca conseguiu se distanciar com sucesso do antigo nicho infantil, consolidando-se como um espaço de experiência e sofisticação essencial para o homem moderno.</p>
