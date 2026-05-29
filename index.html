@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rodolfo Correa — Inteligência Comercial, Conteúdo & Estratégia</title>
+<title>Rodolfo Correa — Estrategista de Aquisição e Conteúdo · Copywriter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
   :root {
-    --bg: #0D0D0D; 
+    --bg: #0D0D0D;
     --ink: #F5F5F5;
     --accent: #FF3B00;
     --accent-light: rgba(255, 59, 0, 0.12);
@@ -22,10 +24,7 @@
     --gap: clamp(1.5rem, 4vw, 3rem);
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { font-size: 16px; scroll-behavior: smooth; }
 
   body {
@@ -61,11 +60,7 @@
     border-bottom: 1px solid var(--accent-border);
   }
 
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
 
   .nav-link {
     font-size: 0.72rem;
@@ -76,9 +71,9 @@
     text-decoration: none;
     transition: color 0.2s;
   }
-
   .nav-link:hover { color: var(--accent); }
 
+  /* ─── HERO ─── */
   .hero {
     min-height: 100svh;
     display: flex;
@@ -121,15 +116,6 @@
     flex-shrink: 0;
   }
 
-  .hero-name-label {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--ink-soft);
-    opacity: 0;
-    animation: fadeUp 0.9s 0.15s ease forwards;
-  }
-
   .hero-headline {
     font-family: var(--serif);
     font-size: clamp(3.5rem, 6.5vw, 6rem);
@@ -146,16 +132,62 @@
     color: var(--accent);
   }
 
-  .hero-bio {
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.8;
+  .hero-subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    font-weight: 400;
     color: var(--ink-soft);
-    max-width: 46ch;
+    line-height: 1.55;
     opacity: 0;
-    animation: fadeUp 0.9s 0.35s ease forwards;
-    border-left: 2px solid var(--accent);
-    padding-left: 1.5rem;
+    animation: fadeUp 0.9s 0.28s ease forwards;
+  }
+
+  .hero-subtitle strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .hero-funnel {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.33s ease forwards;
+    flex-wrap: wrap;
+  }
+
+  .funnel-dot {
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.38s ease forwards;
+  }
+
+  .hero-meta-row {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .hero-meta-row strong {
+    color: var(--ink-soft);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.2rem;
   }
 
   .hero-tags {
@@ -184,7 +216,7 @@
     gap: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.9s 0.48s ease forwards;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
 
   .btn-primary {
@@ -204,11 +236,7 @@
     border: 1px solid var(--accent);
     transition: all 0.3s ease;
   }
-
-  .btn-primary:hover { 
-    background: transparent; 
-    color: var(--accent); 
-  }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
 
   .btn-secondary {
     font-size: 0.85rem;
@@ -220,7 +248,6 @@
     padding-bottom: 2px;
     transition: color 0.2s, border-color 0.2s;
   }
-
   .btn-secondary:hover { color: var(--ink); border-color: var(--accent); }
 
   .hero-footnote {
@@ -232,59 +259,71 @@
     letter-spacing: 0.06em;
     opacity: 0;
     animation: fadeUp 0.9s 0.6s ease forwards;
-    margin-top: 1.5rem;
   }
-
   .hero-footnote-dot { color: var(--accent-border); }
 
-  .stats-bar {
-    display: flex;
-    align-items: stretch;
-    border-bottom: 1px solid var(--accent-border);
+  /* ─── BRANDS ─── */
+  .brands-section {
+    padding: 0;
+    border-bottom: 1px solid var(--ink-xsoft);
     overflow: hidden;
-    opacity: 0;
-    animation: fadeIn 0.9s 0.9s ease forwards;
+    background: #050505;
   }
 
-  .stat-item {
-    flex: 1;
+  .brands-header {
+    padding: 2rem clamp(1.5rem, 6vw, 5rem) 0;
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 2.5rem clamp(1.5rem, 6vw, 5rem);
-    border-right: 1px solid var(--accent-border);
-    position: relative;
-  }
-
-  .stat-item:last-child { border-right: none; }
-
-  .stat-item::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0;
-    height: 3px;
-    background: var(--accent);
-    transition: width 0.4s ease;
-  }
-  .stat-item:hover::after { width: 100%; }
-
-  .stat-number {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 400;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-
-  .stat-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--ink-soft);
   }
 
+  .brands-track-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 3rem 0;
+  }
+
+  .brands-track-wrapper::before,
+  .brands-track-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 150px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .brands-track-wrapper::before { left: 0; background: linear-gradient(to right, #050505, transparent); }
+  .brands-track-wrapper::after  { right: 0; background: linear-gradient(to left, #050505, transparent); }
+
+  .brands-track {
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+    width: max-content;
+    animation: scrollBrands 15s linear infinite;
+  }
+  .brands-track:hover { animation-play-state: paused; }
+
+  @keyframes scrollBrands {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .brand-item {
+    height: 70px;
+    filter: brightness(0) invert(1) opacity(0.4);
+    transition: filter 0.3s ease;
+  }
+  .brand-item:hover { filter: brightness(0) invert(1) opacity(1); }
+  .brand-item img { height: 100%; width: auto; object-fit: contain; }
+
+  /* ─── SECTION ─── */
   section { padding: var(--gap) clamp(1.5rem, 6vw, 5rem); }
 
   .section-header {
@@ -306,7 +345,6 @@
     text-transform: uppercase;
     color: var(--accent);
   }
-
   .section-label::before {
     content: '';
     display: block;
@@ -324,6 +362,7 @@
     margin-top: 0.5rem;
   }
 
+  /* ─── WORKS GRID ─── */
   .works-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
@@ -340,7 +379,6 @@
     gap: 1.25rem;
     transition: all 0.3s ease;
     cursor: pointer;
-    text-decoration: none;
     color: inherit;
     border-radius: 4px;
   }
@@ -411,18 +449,20 @@
     color: var(--ink);
     text-decoration: none;
     transition: color 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
   }
-
   .work-card:hover .card-cta { color: var(--accent); }
 
   .card-arrow {
     font-size: 1rem;
     transition: transform 0.25s ease;
   }
-
   .work-card:hover .card-arrow { transform: translate(3px, -3px); }
 
-  /* ─── FEATURED CARD (B2B) ─── */
+  /* ─── FEATURED B2B CARD ─── */
   .work-card.featured-b2b {
     grid-column: 1 / -1;
     display: grid !important;
@@ -433,6 +473,7 @@
     background: linear-gradient(135deg, #0a0a0a 0%, #1a0800 100%);
     border: 1px solid var(--accent);
     box-shadow: 0 0 40px rgba(255,59,0,0.15);
+    cursor: pointer;
   }
 
   .work-card.featured-b2b:hover {
@@ -472,11 +513,7 @@
     line-height: 1.2;
     color: var(--ink);
   }
-
-  .b2b-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
+  .b2b-title em { font-style: italic; color: var(--accent); }
 
   .b2b-desc {
     font-size: 0.95rem;
@@ -542,75 +579,148 @@
     z-index: 1;
   }
 
-  /* ─── BRANDS CAROUSEL ─── */
-  .brands-section {
-    padding: 0;
-    border-bottom: 1px solid var(--ink-xsoft);
-    overflow: hidden;
-    background: #050505;
-  }
-
-  .brands-header {
-    padding: 2rem clamp(1.5rem, 6vw, 5rem) 0;
-    display: flex;
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
+    justify-content: center;
+    padding: 1.5rem;
   }
 
-  .brands-track-wrapper {
-    position: relative;
+  .modal-overlay.active {
+    display: flex;
+  }
+
+  .modal-box {
+    background: #111;
+    border: 1px solid var(--accent-border);
+    border-radius: 6px;
+    max-width: 760px;
     width: 100%;
-    overflow: hidden;
-    padding: 3rem 0;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.3s ease;
   }
 
-  .brands-track-wrapper::before,
-  .brands-track-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 150px;
-    z-index: 2;
-    pointer-events: none;
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
-  .brands-track-wrapper::before { left: 0; background: linear-gradient(to right, #050505, transparent); }
-  .brands-track-wrapper::after  { right: 0; background: linear-gradient(to left,  #050505, transparent); }
 
-  .brands-track {
+  .modal-header {
+    padding: 2rem 2.5rem 1.5rem;
+    border-bottom: 1px solid var(--ink-xsoft);
+    position: sticky;
+    top: 0;
+    background: #111;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .modal-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--accent-border);
+    border-radius: 20px;
+    margin-bottom: 0.75rem;
+    display: block;
+    width: fit-content;
+  }
+
+  .modal-title {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+
+  .modal-close {
+    background: none;
+    border: 1px solid var(--ink-xsoft);
+    color: var(--ink-soft);
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 6rem;
-    width: max-content;
-    animation: scrollBrands 15s linear infinite;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    margin-top: 0.2rem;
+  }
+  .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+  .modal-body {
+    padding: 2rem 2.5rem 2.5rem;
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    font-weight: 300;
   }
 
-  .brands-track:hover { animation-play-state: paused; }
-
-  @keyframes scrollBrands {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+  .modal-body h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 1.5rem 0 0.75rem;
   }
 
-  .brand-item {
-    height: 70px;
-    filter: brightness(0) invert(1) opacity(0.4);
-    transition: filter 0.3s ease;
+  .modal-body h3:first-child { margin-top: 0; }
+
+  .modal-body p { margin-bottom: 1rem; }
+  .modal-body p:last-child { margin-bottom: 0; }
+
+  .modal-body ul {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
   }
 
-  .brand-item:hover { filter: brightness(0) invert(1) opacity(1); }
-
-  .brand-item img {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
+  .modal-body ul li {
+    margin-bottom: 0.4rem;
   }
 
-  /* ─── CONTACT STRIP ─── */
+  .modal-body a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-border);
+    transition: border-color 0.2s;
+  }
+  .modal-body a:hover { border-color: var(--accent); }
+
+  .modal-body strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .modal-body .highlight-box {
+    background: var(--accent-light);
+    border: 1px solid var(--accent-border);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+  }
+
+  /* ─── CONTACT ─── */
   .contact-strip {
     background: #111;
     padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
@@ -645,11 +755,7 @@
     line-height: 1.1;
   }
 
-  .contact-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+  .contact-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
   .contact-btn {
     display: inline-flex;
@@ -671,22 +777,14 @@
     color: #000;
     border: 1px solid #25D366;
   }
-
-  .contact-btn--whatsapp:hover {
-    background: transparent;
-    color: #25D366;
-  }
+  .contact-btn--whatsapp:hover { background: transparent; color: #25D366; }
 
   .contact-btn--linkedin {
     background: #0A66C2;
     color: #FFF;
     border: 1px solid #0A66C2;
   }
-
-  .contact-btn--linkedin:hover {
-    background: transparent;
-    color: #0A66C2;
-  }
+  .contact-btn--linkedin:hover { background: transparent; color: #0A66C2; }
 
   footer {
     display: flex;
@@ -698,16 +796,8 @@
     background: #000;
   }
 
-  .footer-copy {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    letter-spacing: 0.04em;
-  }
-
-  .footer-copy strong {
-    font-weight: 700;
-    color: var(--ink);
-  }
+  .footer-copy { font-size: 0.85rem; color: var(--ink-soft); letter-spacing: 0.04em; }
+  .footer-copy strong { font-weight: 700; color: var(--ink); }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -724,11 +814,7 @@
     transform: translateY(25px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
+  .reveal.visible { opacity: 1; transform: none; }
 
   @media (max-width: 900px) {
     .hero { padding-top: 6rem; }
@@ -740,14 +826,11 @@
 
   @media (max-width: 768px) {
     .nav-right .nav-link { display: none; }
-    .stats-bar { flex-wrap: wrap; }
-    .stat-item { min-width: 50%; border-bottom: 1px solid var(--accent-border); }
-    .stat-item:nth-child(even) { border-right: none; }
     footer { justify-content: center; text-align: center; }
+    .modal-header, .modal-body { padding-left: 1.5rem; padding-right: 1.5rem; }
   }
 
   @media (max-width: 480px) {
-    .stat-item { min-width: 100%; border-right: none; }
     .contact-btn { width: 100%; justify-content: center; }
   }
 </style>
@@ -761,33 +844,49 @@
   </div>
 </nav>
 
+<!-- ─── HERO ─── -->
 <div class="hero">
   <div class="hero-text">
     <span class="hero-eyebrow">Portfólio · 2026</span>
-    <div class="hero-name-block">
-      <span class="hero-name-label">Olá, sou o</span>
-      <h1 class="hero-headline">
-        Rodolfo<br>
-        <em>Correa.</em>
-      </h1>
-    </div>
-    <p class="hero-bio">
-      Analista de comunicação e marketing com experiência em projetos editoriais, branding e estratégias de inbound e outbound. Passei por rádio e TV e cheguei à estratégia digital. Combino visão analítica com escrita persuasiva para gerar resultados reais.
+
+    <h1 class="hero-headline">
+      Rodolfo<br>
+      <em>Correa.</em>
+    </h1>
+
+    <p class="hero-subtitle" style="opacity:0;animation:fadeUp 0.9s 0.25s ease forwards;">
+      <strong>Estrategista de Aquisição e Conteúdo · Copywriter</strong>
     </p>
-    <div class="hero-tags">
-      <span class="hero-tag">Branding</span>
-      <span class="hero-tag">Inbound</span>
-      <span class="hero-tag">Outbound</span>
-      <span class="hero-tag">Audiovisual</span>
-      <span class="hero-tag">Social Media</span>
+
+    <div class="hero-funnel">
+      <span>Experiência nas 3 etapas do Funil</span>
+      <span class="funnel-dot">·</span>
+      <span>Atração</span>
+      <span class="funnel-dot">·</span>
+      <span>Interesse</span>
+      <span class="funnel-dot">·</span>
+      <span>Conversão</span>
     </div>
+
+    <div class="hero-meta">
+      <div class="hero-meta-row">
+        <strong>Formação</strong>
+        Comunicação Social com ênfase em Publicidade
+      </div>
+      <div class="hero-meta-row">
+        <strong>Ferramentas</strong>
+        RD Station · Canva · Photoshop · CapCut · Claude · Gemini · Meta Ads · Google Analytics
+      </div>
+    </div>
+
     <div class="hero-cta">
       <a href="#work" class="btn-primary">
-        Ver Trabalhos
+        Ver Projetos
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 4l3.5 3-3.5 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a href="#contact" class="btn-secondary">Falar comigo →</a>
     </div>
+
     <div class="hero-footnote">
       <span>Maringá · PR</span>
       <span class="hero-footnote-dot">·</span>
@@ -796,25 +895,7 @@
   </div>
 </div>
 
-<div class="stats-bar">
-  <div class="stat-item">
-    <span class="stat-number">10+</span>
-    <span class="stat-label">Projetos Documentados</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">5+</span>
-    <span class="stat-label">Segmentos de Atuação</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">360°</span>
-    <span class="stat-label">Visão Estratégica</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">∞</span>
-    <span class="stat-label">Foco em Resultado</span>
-  </div>
-</div>
-
+<!-- ─── BRANDS ─── -->
 <div class="brands-section">
   <div class="brands-header">Marcas com quem trabalhei</div>
   <div class="brands-track-wrapper">
@@ -831,18 +912,19 @@
   </div>
 </div>
 
+<!-- ─── PROJECTS ─── -->
 <section id="work">
   <div class="section-header reveal">
     <div>
-      <span class="section-label">Seleção de Trabalhos</span>
-      <h2 class="section-title">Projetos em Destaque</h2>
+      <span class="section-label">Portfólio</span>
+      <h2 class="section-title">O que eu posso fazer<br>pela sua empresa?</h2>
     </div>
   </div>
 
   <div class="works-grid">
 
-    <!-- #01 — B2B Super Featured -->
-    <a class="work-card featured-b2b reveal" href="https://www.notion.so/rodolfocorrea/Estrat-gia-de-Aquisi-o-B2B-venda-R-30-mil-Software-House-36d943d2d80780749521d9a9f96531bc?v=12f943d2d80781288bb8000c7a8b241d&source=copy_link" target="_blank" rel="noopener">
+    <!-- BOX 1 — Case de Resultado B2B -->
+    <div class="work-card featured-b2b reveal" onclick="openModal('modal-b2b')">
       <div class="b2b-left">
         <div class="b2b-super-badge">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -852,10 +934,9 @@
           <span class="card-index" style="color:rgba(255,59,0,0.5)">01</span>
           <span class="card-tag">B2B · Vendas · Estratégia</span>
         </div>
-        <h2 class="b2b-title">Estratégia de<br>Aquisição <em>B2B</em><br>— Software House</h2>
-        <p class="b2b-desc">Estruturação completa de uma estratégia de aquisição B2B que, em apenas 15 dias, gerou uma venda de mais de R$ 30 mil para uma Software House.</p>
+        <h2 class="b2b-title">Estratégia de conversão de leads qualificados que gerou um contrato fechado de mais de <em>R$ 30 mil</em> para uma Software House</h2>
         <div class="card-footer" style="border-top-color:var(--accent-border);margin-top:0.5rem">
-          <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
+          <button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
         </div>
       </div>
       <div class="b2b-right">
@@ -874,132 +955,85 @@
           <span class="b2b-metric-label">Estratégia Completa</span>
         </div>
       </div>
-    </a>
+    </div>
 
-    <!-- #02 — Sicredi Investor Day -->
-    <a class="work-card reveal" href="https://www.notion.so/Primeiro-Dexis-Investor-Day-Sicredi-12f943d2d80780a59df4e74ff9978dc7?pvs=25" target="_blank" rel="noopener">
+    <!-- BOX 2 — Copywriting G1 -->
+    <div class="work-card reveal" onclick="openModal('modal-g1')">
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="card-index">02</span>
-        <span class="card-tag">Evento · Institucional</span>
+        <span class="card-tag">Copywriting</span>
       </div>
-      <h3 class="card-title">Primeiro Dexis Investor Day — Sicredi</h3>
-      <p class="card-desc">Estratégia de comunicação e produção de conteúdo para o primeiro evento institucional voltado a investidores da cooperativa Sicredi Dexis, com foco em posicionamento e credibilidade financeira.</p>
+      <h3 class="card-title">Textos Publicitários no G1</h3>
+      <p class="card-desc">Matérias produzidas para o Especial Publicitário do portal G1, com foco em comunicação institucional e editorial para a Associação Comercial de Maringá.</p>
       <div class="card-footer">
-        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
+        <button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
       </div>
-    </a>
+    </div>
 
-    <!-- #03 — Cocamar -->
-    <a class="work-card reveal" href="https://rodolfocorrea.notion.site/A-Solidariedade-a-Nossa-Energia-Cocamar-12f943d2d8078116b36bcffc1bd58f10?pvs=25" target="_blank" rel="noopener">
+    <!-- BOX 3 — Cocamar Premiado -->
+    <div class="work-card reveal" onclick="openModal('modal-cocamar')">
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="card-index">03</span>
-        <span class="card-tag">Branding · Social</span>
+        <span class="card-tag">Planejamento de Comunicação</span>
       </div>
       <div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#FFB300;background:rgba(255,179,0,0.1);padding:0.2rem 0.6rem;border:1px solid rgba(255,179,0,0.3);border-radius:20px;width:fit-content">
         <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        Premiado
+        Projeto Premiado
       </div>
-      <h3 class="card-title">A Solidariedade é a Nossa Energia — Cocamar</h3>
-      <p class="card-desc">Entrega de sistemas de energia fotovoltaica para 17 entidades assistenciais dos estados do Paraná, São Paulo e Mato Grosso do Sul, em 2023.</p>
+      <h3 class="card-title">A Solidariedade é a nossa Energia — Cocamar</h3>
+      <p class="card-desc">Comunicação de projeto social premiado com entrega de energia fotovoltaica a 17 entidades assistenciais em 3 estados.</p>
       <div class="card-footer">
-        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
+        <button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
       </div>
-    </a>
+    </div>
 
-    <!-- #04 — G1 Especial -->
-    <a class="work-card reveal" href="https://www.notion.so/G1-Especial-Publicit-rio-130943d2d8078029ae68d080e3127eac?pvs=25" target="_blank" rel="noopener">
+    <!-- BOX 4 — RPC -->
+    <div class="work-card reveal" onclick="openModal('modal-rpc')">
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="card-index">04</span>
-        <span class="card-tag">Mídia · Editorial</span>
-      </div>
-      <h3 class="card-title">G1 — Especial Publicitário</h3>
-      <p class="card-desc">Produção de conteúdo especial para o portal G1 com formato editorial publicitário, integrando jornalismo e branding de forma orgânica e de alta credibilidade.</p>
-      <div class="card-footer">
-        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
-      </div>
-    </a>
-
-    <!-- #05 — Trilha do Outbound -->
-    <a class="work-card reveal" href="https://notion.so/Trilha-do-Outbound-342943d2d8078030bc30cd1454d86084?pvs=25" target="_blank" rel="noopener">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">05</span>
-        <span class="card-tag">Vendas · Estratégia</span>
-      </div>
-      <h3 class="card-title">Trilha do Outbound</h3>
-      <p class="card-desc">Estruturação de uma trilha completa de estratégia outbound para prospecção ativa, com cadências, scripts e ferramentas de inteligência comercial aplicadas.</p>
-      <div class="card-footer">
-        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
-      </div>
-    </a>
-
-    <!-- #06 — Vibe Coding -->
-    <a class="work-card reveal" href="https://notion.so/Desenvolvimento-gil-de-Landing-Pages-Vibe-Coding-364943d2d80780068d86e70fbfdc72ba?pvs=25" target="_blank" rel="noopener">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">06</span>
-        <span class="card-tag">Tech · Produto</span>
-      </div>
-      <h3 class="card-title">Desenvolvimento Ágil de Landing Pages — Vibe Coding</h3>
-      <p class="card-desc">Metodologia de desenvolvimento acelerado de landing pages usando vibe coding, com foco em velocidade de entrega, conversão e prototipagem orientada a resultado.</p>
-      <div class="card-footer">
-        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
-      </div>
-    </a>
-
-    <!-- #07 — RPC Globo -->
-    <a class="work-card reveal" href="https://www.notion.so/RPC-Afiliada-TV-Globo-12f943d2d80780a79d36e43393121b6a?pvs=25" target="_blank" rel="noopener">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">07</span>
-        <span class="card-tag">TV · Audiovisual</span>
+        <span class="card-tag">Promoções e Eventos</span>
       </div>
       <h3 class="card-title">RPC — Afiliada TV Globo</h3>
-      <p class="card-desc">Produção de conteúdo e estratégia de comunicação para a RPC, afiliada da TV Globo no Paraná, com foco em audiência e posicionamento regional de marca.</p>
+      <p class="card-desc">4 anos como Assistente de Direção na equipe de Promoções e Eventos, com participação em projetos de grande alcance no Paraná.</p>
       <div class="card-footer">
-        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
+        <button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
       </div>
-    </a>
+    </div>
 
-    <!-- #08 — Nova Sede Sicredi -->
-    <a class="work-card reveal" href="https://www.notion.so/Nova-Sede-Sicredi-Dexis-12f943d2d80780cea7d3e82dd392dd5f?pvs=25" target="_blank" rel="noopener">
+    <!-- BOX 5 — Audiovisual -->
+    <div class="work-card reveal" onclick="openModal('modal-audiovisual')">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">08</span>
-        <span class="card-tag">Institucional</span>
+        <span class="card-index">05</span>
+        <span class="card-tag">Audiovisual</span>
       </div>
-      <h3 class="card-title">Nova Sede — Sicredi Dexis</h3>
-      <p class="card-desc">Planejamento e execução da comunicação para a inauguração da nova sede da Sicredi Dexis, incluindo narrativa institucional, materiais gráficos e cobertura do evento.</p>
+      <h3 class="card-title">Roteiros audiovisuais para diversas empresas</h3>
+      <p class="card-desc">Roteiros, direção de gravação e edição colaborativa para Sicredi Dexis, Acim, Cocamar e outras marcas.</p>
       <div class="card-footer">
-        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
+        <button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
       </div>
-    </a>
+    </div>
 
-    <!-- #09 — Mega Outlet -->
-    <a class="work-card reveal" href="https://www.notion.so/Mega-Outlet-2024-12f943d2d8078044a840c3e685d400e3?pvs=25" target="_blank" rel="noopener">
+    <!-- BOX 6 — Rebranding Domen -->
+    <div class="work-card reveal" onclick="openModal('modal-domen')">
       <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">09</span>
-        <span class="card-tag">Varejo · Evento</span>
+        <span class="card-index">06</span>
+        <span class="card-tag">Estratégia de Rebranding</span>
       </div>
-      <h3 class="card-title">Mega Outlet 2024</h3>
-      <p class="card-desc">Estratégia de comunicação para o Mega Outlet 2024, cobrindo posicionamento de marca, divulgação multicanal e ativações que maximizaram o fluxo e o engajamento do público.</p>
+      <div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#FFB300;background:rgba(255,179,0,0.1);padding:0.2rem 0.6rem;border:1px solid rgba(255,179,0,0.3);border-radius:20px;width:fit-content">
+        <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Case de Sucesso
+      </div>
+      <h3 class="card-title">Rebranding Completo e Lançamento da Domen Store, Arapongas/PR</h3>
+      <p class="card-desc">Transição completa de marca infantil para moda masculina premium, de ponta a ponta — naming, identidade, experiência e lançamento.</p>
       <div class="card-footer">
-        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
+        <button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
       </div>
-    </a>
-
-    <!-- #10 — Audiovisuais -->
-    <a class="work-card reveal" href="https://www.notion.so/Audiovisuais-1b6943d2d80780f7ab9cede2959f9c26?pvs=25" target="_blank" rel="noopener">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">10</span>
-        <span class="card-tag">Vídeo · Produção</span>
-      </div>
-      <h3 class="card-title">Audiovisuais</h3>
-      <p class="card-desc">Portfólio de produções audiovisuais — roteiro, direção e estratégia de conteúdo em vídeo para marcas, eventos e plataformas digitais com diferentes objetivos comunicacionais.</p>
-      <div class="card-footer">
-        <span class="card-cta">Ver projeto <span class="card-arrow">↗</span></span>
-      </div>
-    </a>
+    </div>
 
   </div>
 </section>
 
+<!-- ─── CONTACT ─── -->
 <section id="contact" class="contact-strip">
   <div class="contact-strip-inner reveal">
     <div>
@@ -1008,15 +1042,11 @@
     </div>
     <div class="contact-actions">
       <a href="https://wa.me/5544991724857" target="_blank" rel="noopener" class="contact-btn contact-btn--whatsapp">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.663-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-        </svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.663-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
         WhatsApp
       </a>
       <a href="https://linkedin.com/in/rodolffocorrea" target="_blank" rel="noopener" class="contact-btn contact-btn--linkedin">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
       </a>
     </div>
@@ -1024,12 +1054,227 @@
 </section>
 
 <footer>
-  <p class="footer-copy">
-    <strong>Rodolfo Correa</strong> © 2026
-  </p>
+  <p class="footer-copy"><strong>Rodolfo Correa</strong> © 2026</p>
 </footer>
 
+<!-- ─── MODAIS ─── -->
+
+<!-- Modal B2B -->
+<div class="modal-overlay" id="modal-b2b" onclick="closeModalOnOverlay(event, 'modal-b2b')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Case de Resultado</span>
+        <h2 class="modal-title">Estratégia de conversão de leads qualificados que gerou um contrato fechado de mais de R$ 30 mil para uma Software House</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-b2b')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>Em 2025, assumi o desafio de estruturar a estratégia de aquisição de leads para uma software house sediada em Maringá/PR. A empresa enfrentava um obstáculo comum no mercado de tecnologia B2B: o ticket médio elevado dos serviços tradicionais de desenvolvimento limitava o volume de novos clientes e gerava um ciclo de vendas longo e complexo. Havia a necessidade urgente de diversificar o portfólio para abrir novos canais de receita.</p>
+
+      <h3>A Solução Estratégica</h3>
+      <p>A resposta para o problema não foi apenas mudar o discurso, mas criar uma nova oferta de entrada. Juntos, criamos um modelo de Desenvolvimento de Software Baseado em Inteligência Artificial, focado em pequenas e médias empresas.</p>
+      <p>O objetivo principal era entregar a mesma eficiência e robustez de um projeto sob medida tradicional, mas com um tempo de entrega reduzido e um custo significativamente mais acessível.</p>
+      <p>Para viabilizar o projeto, conduzi as seguintes etapas:</p>
+      <ul>
+        <li><strong>Alinhamento Executivo:</strong> Participei de reuniões estratégicas com o time técnico e a diretoria para apresentar a análise de mercado, o mapeamento do público-alvo, o escopo técnico do serviço e o naming do produto.</li>
+        <li><strong>Validação de Mercado (MVP):</strong> Com a primeira versão do escopo aprovada, desenvolvemos uma Landing Page focada na dor do cliente e estruturamos campanhas de tráfego pago para testar o público-alvo em tempo real.</li>
+      </ul>
+
+      <h3>Os Resultados e a Tração</h3>
+      <p>O impacto da estratégia foi imediato e superou as expectativas iniciais de validação:</p>
+      <div class="highlight-box">
+        <strong>Primeira Venda em 15 Dias:</strong> Logo nas duas primeiras semanas de campanha, captamos um lead qualificado vindo de Belém do Pará. O contato evoluiu rapidamente para a mesa de negociação, resultando no fechamento de um contrato de mais de R$ 30 mil. Este marco representou a primeira venda da software house originada 100% via canais de marketing.
+      </div>
+      <p><strong>Expansão para Eventos Nacionais:</strong> Utilizando os dados de tração inicial, mapeei oportunidades presenciais e identificamos a Feira do Empreendedor do SEBRAE em São Paulo (2025) como o palco ideal. Em tempo recorde, estruturamos a operação interna e o material de vendas para expor e escalar o novo serviço no maior evento de empreendedorismo do país.</p>
+
+      <h3>O Impacto Atual</h3>
+      <p>O que começou como um teste de validação de mercado transformou-se na principal engrenagem de crescimento da empresa. Hoje, o serviço de Desenvolvimento com IA é o principal carro-chefe da software house, provando que o alinhamento entre posicionamento de mercado, produto certo e canais de aquisição eficientes é a chave para destravar o crescimento de empresas de tecnologia.</p>
+      <p>🔗 <a href="https://lughy.com.br" target="_blank" rel="noopener">Conheça o projeto atual: Lughy — Desenvolvimento com IA</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal G1 -->
+<div class="modal-overlay" id="modal-g1" onclick="closeModalOnOverlay(event, 'modal-g1')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Copywriting</span>
+        <h2 class="modal-title">Textos Publicitários no G1</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-g1')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>O portal de notícias G1 possui o "Especial Publicitário", um espaço dedicado à divulgação de negócios. Em 2024, tive a oportunidade de escrever algumas matérias para a Associação Comercial de Maringá — Acim, que foram publicadas nesse espaço.</p>
+      <p>Leia as matérias clicando nos links abaixo:</p>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">Conflito de gerações no mercado de trabalho</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Devedores quitam dívidas após notificação do SPC</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Acim: conectada ao desenvolvimento econômico e social de Maringá e região</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cocamar -->
+<div class="modal-overlay" id="modal-cocamar" onclick="closeModalOnOverlay(event, 'modal-cocamar')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Planejamento de Comunicação · Projeto Premiado</span>
+        <h2 class="modal-title">A Solidariedade é a nossa Energia — Cocamar</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-cocamar')">✕</button>
+    </div>
+    <div class="modal-body">
+      <h3>O Projeto ☀️</h3>
+      <p>Fui um dos responsáveis pela comunicação do projeto "A solidariedade é a nossa energia", da Cocamar, que realizou a entrega de sistemas de energia fotovoltaica para 17 entidades assistenciais dos estados do Paraná, São Paulo e Mato Grosso do Sul, em 2023. Os recursos para esse fim são provenientes do Fates (Fundo de Assistência Técnica, Educacional e Social) recolhido pela cooperativa.</p>
+
+      <h3>Tarefas Executadas 📋</h3>
+      <ul>
+        <li>Plano de Comunicação</li>
+        <li>Briefing</li>
+        <li>Aprovação da ID e peças (convites, backdrop, placas, troféus…)</li>
+        <li>Logística</li>
+        <li>Cotação de gráficas, produtoras de vídeo e fotógrafos</li>
+        <li>Roteiro</li>
+      </ul>
+
+      <h3>Playlist 🎥</h3>
+      <p>O objetivo principal da captação audiovisual desse projeto foi a Prestação de Contas aos cooperados da Cocamar.</p>
+      <p><a href="https://youtube.com/playlist?list=PLKocVaA5VA7AO9BSBipJm_xsIGwp8WsXr&si=85-Jzx0BG-zC3gYP" target="_blank" rel="noopener">▶ Assista a playlist completa aqui</a></p>
+
+      <h3>Reconhecimento 🏆</h3>
+      <div class="highlight-box">
+        Melhor Projeto Ambiental na Certificação Selo ODS 2023, pela Associação Comercial e Empresarial de Maringá (Acim), durante o Summit 2023 – Jornada de Impacto.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal RPC -->
+<div class="modal-overlay" id="modal-rpc" onclick="closeModalOnOverlay(event, 'modal-rpc')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Promoções e Eventos</span>
+        <h2 class="modal-title">RPC — Afiliada TV Globo</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-rpc')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>Durante 4 anos, atuei como Assistente de Direção na equipe de Promoções e Eventos, contribuindo com a realização de projetos que fortaleceram a conexão da emissora com o público. Entre os principais projetos em que estive envolvido:</p>
+
+      <h3>Cobertura semifinal The Voice Brasil 2019</h3>
+      <p>Link Ao Vivo da cidade de Maringá/PR. <a href="https://globoplay.globo.com/v/8060804/" target="_blank" rel="noopener">Assistir no Globoplay</a></p>
+
+      <h3>Prepara RPC 2019</h3>
+      <p>Aulão de revisão para o Vestibular da UEL, promovido pela RPC. <a href="https://globoplay.globo.com/v/8152869/" target="_blank" rel="noopener">Assistir no Globoplay</a></p>
+
+      <h3>Cantata de Natal RPC</h3>
+      <p>Evento realizado no "Zerão", em Londrina/PR. <a href="https://globoplay.globo.com/v/8308578/" target="_blank" rel="noopener">Assistir no Globoplay</a></p>
+
+      <h3>Numerologia de Ana Maria Braga</h3>
+      <p>Matéria gravada em Londrina/PR pela equipe local. <a href="https://globoplay.globo.com/v/8305842/" target="_blank" rel="noopener">Assistir no Globoplay</a></p>
+
+      <h3>Nosso Amor na RPC</h3>
+      <p>Em 2020, atuei na organização da ação "Nosso Amor na RPC", um projeto desafiador desenvolvido em meio à pandemia. A iniciativa projetou mensagens de amor em prédios de Curitiba, Foz do Iguaçu, Cascavel, Maringá, Ponta Grossa e Londrina durante o mês de junho.</p>
+      <p>Em Londrina, integrei o time responsável por executar a ação na cidade, com as seguintes tarefas:</p>
+      <ul>
+        <li>Curadoria de influenciadores para potencializar o impacto</li>
+        <li>Preparação dos press kits</li>
+        <li>Negociação com a empresa de projeções, garantindo a parceria sem custos</li>
+        <li>Definição estratégica do local de exibição</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Audiovisual -->
+<div class="modal-overlay" id="modal-audiovisual" onclick="closeModalOnOverlay(event, 'modal-audiovisual')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Audiovisual</span>
+        <h2 class="modal-title">Roteiros audiovisuais para diversas empresas</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-audiovisual')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>Escrevi roteiros audiovisuais para empresas como Sicredi Dexis, Acim e Cocamar:</p>
+
+      <h3>A Solidariedade é a nossa energia</h3>
+      <p>Roteiro, direção de gravação e edição colaborativa.</p>
+      <ul>
+        <li><a href="https://youtube.com/playlist?list=PLKocVaA5VA7AO9BSBipJm_xsIGwp8WsXr&si=85-Jzx0BG-zC3gYP" target="_blank" rel="noopener">▶ Assista Aqui (playlist)</a></li>
+      </ul>
+
+      <h3>Sicredi Dexis — 37 anos</h3>
+      <p>Roteiro e edição colaborativa.</p>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">▶ Assista Aqui</a></li>
+      </ul>
+
+      <h3>Nossa Sede Sustentável — Sicredi Dexis</h3>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">▶ Assista Aqui</a></li>
+      </ul>
+
+      <h3>Sobras Cocamar</h3>
+      <p>Roteiro, direção de gravação e edição colaborativa.</p>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">▶ Assista Aqui</a></li>
+      </ul>
+
+      <h3>Mega Outlet | William Souza</h3>
+      <p>Roteiro e edição colaborativa.</p>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener">▶ Assista Aqui (1)</a></li>
+        <li><a href="#" target="_blank" rel="noopener">▶ Assista Aqui (2)</a></li>
+        <li><a href="#" target="_blank" rel="noopener">▶ Assista Aqui (3)</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Domen -->
+<div class="modal-overlay" id="modal-domen" onclick="closeModalOnOverlay(event, 'modal-domen')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">Estratégia de Rebranding · Case de Sucesso</span>
+        <h2 class="modal-title">O Rebranding Completo e Lançamento da Domen Store, Arapongas/PR</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-domen')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Cliente:</strong> Domen Store (antiga marca de vestuário infantil)<br>
+      <strong>Responsável:</strong> Gume Inteligência Comercial<br>
+      <strong>Objetivo:</strong> Reposicionar o modelo de negócios de uma marca de moda infantil para o mercado de moda masculina premium em Arapongas.</p>
+
+      <h3>O Desafio</h3>
+      <p>A proprietária da marca gerenciava uma operação voltada para o público infantil, onde o processo de compra e a comunicação eram direcionados quase que exclusivamente às mães. Identificando uma oportunidade de mercado, ela buscou a Gume para realizar uma virada de chave: transicionar o negócio para o setor de moda masculina de alto padrão, focado em elegância e minimalismo.</p>
+
+      <h3>A Solução</h3>
+      <p>Junto com o time da Gume, construímos uma estratégia responsável por toda a jornada de transformação da marca, atuando de ponta a ponta através dos seguintes pilares:</p>
+      <ul>
+        <li><strong>Naming e Identidade Visual:</strong> Criação do novo nome "Domen Store" e acompanhamento do desenvolvimento de uma identidade visual alinhada aos conceitos de sofisticação e minimalismo.</li>
+        <li><strong>Estratégia de Posicionamento:</strong> Transição de público do universo infantil para um conceito sóbrio, clean e focado na elegância masculina, influenciando desde a curadoria dos produtos até a atmosfera física da loja.</li>
+        <li><strong>Experiência do Cliente (CX):</strong> Planejamento de um formato diferenciado de atendimento na loja física, desenhado para tornar a jornada de decisão do homem mais fluida e confortável.</li>
+        <li><strong>Treinamento de Equipe:</strong> Alinhamento estratégico e capacitação do time de vendas para garantir que a nova promessa da marca fosse entregue com consistência em cada ponto de contato.</li>
+        <li><strong>Estratégia de Lançamento e Co-branding:</strong> Planejamento do evento de inauguração e estruturação de ações de collab com marcas locais que compartilham o mesmo público-alvo.</li>
+      </ul>
+
+      <h3>O Resultado</h3>
+      <p>A parceria com a Gume resultou no nascimento da Domen Store, um novo marco de elegância e atitude para a moda masculina em Arapongas. Com uma presença imponente e uma proposta de valor clara, a marca conseguiu se distanciar com sucesso do antigo nicho infantil, consolidando-se como um espaço de experiência e sofisticação essencial para o homem moderno.</p>
+      <p><a href="#" target="_blank" rel="noopener">▶ Assista Aqui</a></p>
+    </div>
+  </div>
+</div>
+
 <script>
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -1038,9 +1283,10 @@
     });
   });
 
+  // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const delay = (Array.from(reveals).indexOf(entry.target) % 3) * 80;
         setTimeout(() => entry.target.classList.add('visible'), delay);
@@ -1048,17 +1294,33 @@
       }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
   reveals.forEach(el => observer.observe(el));
 
-  document.querySelectorAll('.work-card').forEach(card => {
-    let startX, startY;
-    card.addEventListener('mousedown', e => { startX = e.clientX; startY = e.clientY; });
-    card.addEventListener('click', e => {
-      const dx = Math.abs(e.clientX - startX);
-      const dy = Math.abs(e.clientY - startY);
-      if (dx > 5 || dy > 5) e.preventDefault();
-    });
+  // Modal functions
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnOverlay(event, id) {
+    if (event.target === document.getElementById(id)) {
+      closeModal(id);
+    }
+  }
+
+  // Close modal with ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+        modal.classList.remove('active');
+      });
+      document.body.style.overflow = '';
+    }
   });
 </script>
 </body>
