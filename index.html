@@ -39,7 +39,7 @@ nav {
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Alinhado à direita devido à remoção do brand */
+  justify-content: flex-end;
   padding: 2rem clamp(1.5rem, 6vw, 6rem);
   background: rgba(252, 252, 250, 0.85);
   backdrop-filter: blur(20px);
@@ -71,7 +71,7 @@ nav {
 .nav-link:hover { color: var(--ink); }
 .nav-link:hover::after { width: 100%; }
 
-/* ─── HERO (DIAGRAMAÇÃO EDITORIAL ATUALIZADA) ─── */
+/* ─── HERO ─── */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -93,7 +93,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 3.5rem; /* Aumento de respiro estrutural */
+  gap: 3.5rem;
 }
 
 .hero-headline {
@@ -175,7 +175,7 @@ nav {
   gap: 3.5rem;
 }
 
-/* NOVO DESIGN DO FUNIL (DIAGRAMAÇÃO ASSIMÉTRICA) */
+/* FUNIL */
 .hero-funnel-container {
   display: flex;
   flex-direction: column;
@@ -252,8 +252,9 @@ nav {
   font-weight: 500;
 }
 
+/* ─── BRANDS RUNNER (OPÇÃO 1 APLICADA) ─── */
 .brands-section {
-  padding: 7rem clamp(1.5rem, 6vw, 6rem); /* Aumentou de 5rem para 7rem de respiro */
+  padding: 6rem clamp(1.5rem, 6vw, 6rem); /* Leve aumento no respiro para acomodar as logos maiores */
   border-bottom: 1px solid var(--ink-xsoft);
   background: #F4F4F0;
 }
@@ -276,7 +277,7 @@ nav {
 .brands-track {
   display: flex;
   align-items: center;
-  gap: 9rem;
+  gap: 12rem; /* Espaçamento ampliado para a Opção 1 */
   width: max-content;
   animation: scrollBrands 25s linear infinite;
 }
@@ -287,7 +288,7 @@ nav {
 }
 
 .brand-item {
-  height: 65px;
+  height: 85px; /* Altura ampliada para a Opção 1 */
   filter: grayscale(1) contrast(1.4) opacity(0.75);
   transition: filter 0.3s ease, transform 0.3s ease;
 }
@@ -299,7 +300,7 @@ nav {
 
 .brand-item img { height: 100%; width: auto; object-fit: contain; }
 
-/* ─── WORK MURAL (ESTILO PORTFÓLIO ESTRATÉGICO) ─── */
+/* ─── WORK MURAL ─── */
 section { padding: var(--gap) clamp(1.5rem, 6vw, 6rem); }
 
 .section-header {
@@ -439,7 +440,7 @@ section { padding: var(--gap) clamp(1.5rem, 6vw, 6rem); }
   color: var(--accent);
 }
 
-/* ─── CASE DESTACADO EM TELA CHEIA ─── */
+/* CASE DESTACADO */
 .work-card.featured-b2b {
   grid-column: 1 / -1;
   border-left: none !important;
@@ -517,7 +518,7 @@ section { padding: var(--gap) clamp(1.5rem, 6vw, 6rem); }
   color: var(--ink);
 }
 
-/* ─── MODAL EDITORIAL ─── */
+/* MODAL EDITORIAL */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -633,7 +634,7 @@ section { padding: var(--gap) clamp(1.5rem, 6vw, 6rem); }
   color: var(--ink);
 }
 
-/* ─── CONTATO CONTRASTE TOTAL ─── */
+/* CONTATO */
 .contact-strip {
   background: var(--ink);
   color: var(--bg);
@@ -700,7 +701,7 @@ section { padding: var(--gap) clamp(1.5rem, 6vw, 6rem); }
   transform: translateX(5px);
 }
 
-/* ─── FOOTER ─── */
+/* FOOTER */
 footer {
   padding: 3rem clamp(1.5rem, 6vw, 6rem);
   background: var(--bg);
@@ -713,7 +714,7 @@ footer {
 .footer-copy { font-size: 0.9rem; color: var(--ink-soft); }
 .footer-copy strong { font-weight: 800; color: var(--ink); }
 
-/* ─── ANIMATION REVEAL ─── */
+/* REVEAL ANIMATION */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -721,7 +722,7 @@ footer {
 }
 .reveal.visible { opacity: 1; transform: none; }
 
-/* ─── RESPONSIVIDADE (MOBILE BREAKPOINTS) ─── */
+/* RESPONSIVIDADE */
 @media (max-width: 1100px) {
   .hero-grid, .works-grid, .work-card.featured-b2b, .contact-strip-inner {
     grid-template-columns: 1fr;
@@ -740,8 +741,8 @@ footer {
     padding-left: 0;
     padding-top: 3rem;
   }
-  .brand-item { height: 50px; }
-  .brands-track { gap: 5rem; }
+  .brand-item { height: 60px; } /* Ajuste proporcional em telas médias */
+  .brands-track { gap: 6rem; }
 }
 
 @media (max-width: 600px) {
@@ -781,7 +782,6 @@ footer {
     </div>
     
     <div class="hero-right">
-      <!-- DIAGRAMAÇÃO DO FUNIL OTIMIZADA COMO EM REVIEWS DE BRANDING -->
       <div class="hero-funnel-container">
         <span class="hero-funnel-title">Atuação Estratégica</span>
         <div class="hero-funnel-badge">
@@ -843,7 +843,7 @@ footer {
   </div>
 
   <div class="works-grid">
-    <!-- CASE EM DESTAQUE (TELA CHEIA) -->
+    <!-- CASE EM DESTAQUE -->
     <div class="work-card featured-b2b reveal" onclick="openModal('modal-b2b')">
       <div class="b2b-left">
         <div class="b2b-super-badge">Case de Resultado</div>
@@ -1150,7 +1150,7 @@ footer {
       <strong>Responsável:</strong> Gume Inteligência Comercial<br>
       <strong>Objetivo:</strong> Reposicionar o modelo de negócios de uma marca de moda infantil para o mercado de moda masculina premium em Arapongas.</p>
       <h3>O Desafio</h3>
-      <p>A proprietária da marca gerenciava uma operação voltada para o público infantil, onde o processo de compra e a comunicação eram direcionados quase que exclusivamente às mães. Identificando uma oportunidade de mercado, ela buscou a Gume para realizar uma virada de chave: transicionar o negócio para o sector de moda masculina de alto padrão, focado em elegância e minimalismo.</p>
+      <p>A proprietária da marca gerenciava uma operation voltada para o público infantil, onde o processo de compra e a comunicação eram direcionados quase que exclusivamente às mães. Identificando uma oportunidade de mercado, ela buscou a Gume para realizar uma virada de chave: transicionar o negócio para o sector de moda masculina de alto padrão, focado em elegância e minimalismo.</p>
       <h3>A Solução</h3>
       <p>Junto com o time da Gume, construímos uma estratégia responsável por toda a jornada de transformação da marca, atuando de ponta a ponta através dos seguintes pilares:</p>
       <ul>
