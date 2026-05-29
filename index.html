@@ -8,1359 +8,1314 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
-
-  :root {
-    --bg: #0D0D0D;
-    --ink: #F5F5F5;
-    --accent: #FF3B00;
-    --accent-light: rgba(255, 59, 0, 0.12);
-    --accent-border: rgba(255, 59, 0, 0.3);
-    --ink-soft: rgba(245, 245, 245, 0.65);
-    --ink-xsoft: rgba(245, 245, 245, 0.25);
-    --card-hover: rgba(255, 255, 255, 0.03);
-    --serif: 'Playfair Display', Georgia, serif;
-    --sans: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
-    --gap: clamp(1.5rem, 4vw, 3rem);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { font-size: 16px; scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-weight: 400;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 1.25rem clamp(1.5rem, 6vw, 5rem);
-    background: rgba(13, 13, 13, 0.85);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--accent-border);
-  }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .nav-link {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .nav-link:hover { color: var(--accent); }
-
-  .hero {
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--accent-border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.75rem;
-    padding: 8rem clamp(2rem, 6vw, 5rem) 4rem;
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-  }
-
-  .hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    opacity: 0;
-    animation: fadeUp 0.9s 0.1s ease forwards;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 1.75rem;
-    height: 2px;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-
-  .hero-name-label {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--ink-soft);
-    opacity: 0;
-    animation: fadeUp 0.9s 0.15s ease forwards;
-  }
-
-  .hero-headline {
-    font-family: var(--serif);
-    font-size: clamp(3.5rem, 6.5vw, 6rem);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    opacity: 0;
-    animation: fadeUp 0.9s 0.2s ease forwards;
-  }
-
-  .hero-headline em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .hero-bio {
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--ink-soft);
-    max-width: 46ch;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.35s ease forwards;
-    border-left: 2px solid var(--accent);
-    padding-left: 1.5rem;
-  }
-
-  .hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.45s ease forwards;
-  }
-
-  .hero-tag {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink);
-    border: 1px solid var(--accent-border);
-    padding: 0.35rem 0.85rem;
-    background: transparent;
-    border-radius: 40px;
-  }
-
-  .hero-cta {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.48s ease forwards;
-    margin-top: 1rem;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    background: var(--accent);
-    color: #FFF;
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1rem 2rem;
-    border-radius: 2px;
-    border: 1px solid var(--accent);
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary:hover {
-    background: transparent;
-    color: var(--accent);
-  }
-
-  .btn-secondary {
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--ink-soft);
-    text-decoration: none;
-    border-bottom: 1px solid var(--accent-border);
-    padding-bottom: 2px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-
-  .btn-secondary:hover { color: var(--ink); border-color: var(--accent); }
-
-  .hero-footnote {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.72rem;
-    color: var(--ink-xsoft);
-    letter-spacing: 0.06em;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.6s ease forwards;
-    margin-top: 1.5rem;
-  }
-
-  .hero-footnote-dot { color: var(--accent-border); }
-
-  .stats-bar {
-    display: flex;
-    align-items: stretch;
-    border-bottom: 1px solid var(--accent-border);
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeIn 0.9s 0.9s ease forwards;
-  }
-
-  .stat-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 2.5rem clamp(1.5rem, 6vw, 5rem);
-    border-right: 1px solid var(--accent-border);
-    position: relative;
-  }
-
-  .stat-item:last-child { border-right: none; }
-
-  .stat-item::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0;
-    height: 3px;
-    background: var(--accent);
-    transition: width 0.4s ease;
-  }
-  .stat-item:hover::after { width: 100%; }
-
-  .stat-number {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 400;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-
-  .stat-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  section { padding: var(--gap) clamp(1.5rem, 6vw, 5rem); }
-
-  .section-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: clamp(2.5rem, 4vw, 4rem);
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--ink-xsoft);
-  }
-
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 1.5rem;
-    height: 2px;
-    background: var(--accent);
-  }
-
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    margin-top: 0.5rem;
-  }
-
-  .works-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
-    gap: 2rem;
-  }
-
-  .work-card {
-    position: relative;
-    padding: 2.5rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--accent-border);
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 4px;
-  }
-
-  .work-card:hover {
-    background: var(--card-hover);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    border-color: var(--accent);
-  }
-
-  .card-index {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    color: var(--ink-xsoft);
-    font-family: var(--sans);
-  }
-
-  .card-tag {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: var(--accent-light);
-    padding: 0.25rem 0.65rem;
-    border: 1px solid var(--accent-border);
-    width: fit-content;
-    border-radius: 20px;
-  }
-
-  .card-title {
-    font-family: var(--serif);
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    font-weight: 400;
-    line-height: 1.3;
-    color: var(--ink);
-    flex-grow: 1;
-  }
-
-  .card-desc {
-    font-size: 0.9rem;
-    line-height: 1.65;
-    color: var(--ink-soft);
-    font-weight: 300;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--ink-xsoft);
-  }
-
-  .card-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .work-card:hover .card-cta { color: var(--accent); }
-
-  .card-arrow {
-    font-size: 1rem;
-    transition: transform 0.25s ease;
-  }
-
-  .work-card:hover .card-arrow { transform: translate(3px, -3px); }
-
-  /* ─── FEATURED CARD (B2B) ─── */
-  .work-card.featured-b2b {
-    grid-column: 1 / -1;
-    display: grid !important;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    padding: 0;
-    overflow: hidden;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a0800 100%);
-    border: 1px solid var(--accent);
-    box-shadow: 0 0 40px rgba(255,59,0,0.15);
-  }
-
-  .work-card.featured-b2b:hover {
-    box-shadow: 0 0 60px rgba(255,59,0,0.3);
-    transform: translateY(-4px);
-  }
-
-  .b2b-left {
-    padding: 3.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .b2b-super-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #000;
-    background: var(--accent);
-    padding: 0.4rem 1rem;
-    width: fit-content;
-    border-radius: 2px;
-  }
-
-  .b2b-title {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--ink);
-  }
-
-  .b2b-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .b2b-desc {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    font-weight: 300;
-    max-width: 44ch;
-  }
-
-  .b2b-right {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    background: rgba(255,59,0,0.06);
-    border-left: 1px solid var(--accent-border);
-    overflow: hidden;
-    padding: 3.5rem;
-  }
-
-  .b2b-right::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 70% 50%, rgba(255,59,0,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .b2b-metric {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .b2b-metric-number {
-    font-family: var(--serif);
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 400;
-    color: var(--accent);
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-
-  .b2b-metric-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  .b2b-divider {
-    width: 1px;
-    height: 3rem;
-    background: var(--accent-border);
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ─── BRANDS CAROUSEL ─── */
-  .brands-section {
-    padding: 0;
-    border-bottom: 1px solid var(--ink-xsoft);
-    overflow: hidden;
-    background: #050505;
-  }
-
-  .brands-header {
-    padding: 2rem clamp(1.5rem, 6vw, 5rem) 0;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  .brands-track-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    padding: 3rem 0;
-  }
-
-  .brands-track-wrapper::before,
-  .brands-track-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 150px;
-    z-index: 2;
-    pointer-events: none;
-  }
-  .brands-track-wrapper::before { left: 0; background: linear-gradient(to right, #050505, transparent); }
-  .brands-track-wrapper::after  { right: 0; background: linear-gradient(to left,  #050505, transparent); }
-
-  .brands-track {
-    display: flex;
-    align-items: center;
-    gap: 6rem;
-    width: max-content;
-    animation: scrollBrands 15s linear infinite;
-  }
-
-  .brands-track:hover { animation-play-state: paused; }
-
-  @keyframes scrollBrands {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-
-  .brand-item {
-    height: 70px;
-    filter: brightness(0) invert(1) opacity(0.4);
-    transition: filter 0.3s ease;
-  }
-
-  .brand-item:hover { filter: brightness(0) invert(1) opacity(1); }
-
-  .brand-item img {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
-  }
-
-  /* ─── CONTACT STRIP ─── */
-  .contact-strip {
-    background: #111;
-    padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
-    border-top: 1px solid var(--accent-border);
-  }
-
-  .contact-strip-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .contact-eyebrow {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-  }
-
-  .contact-headline {
-    font-family: var(--serif);
-    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.1;
-  }
-
-  .contact-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .contact-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1rem 2rem;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-
-  .contact-btn--whatsapp {
-    background: #25D366;
-    color: #000;
-    border: 1px solid #25D366;
-  }
-
-  .contact-btn--whatsapp:hover {
-    background: transparent;
-    color: #25D366;
-  }
-
-  .contact-btn--linkedin {
-    background: #0A66C2;
-    color: #FFF;
-    border: 1px solid #0A66C2;
-  }
-
-  .contact-btn--linkedin:hover {
-    background: transparent;
-    color: #0A66C2;
-  }
-
-  footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 2.5rem clamp(1.5rem, 6vw, 5rem);
-    background: #000;
-  }
-
-  .footer-copy {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    letter-spacing: 0.04em;
-  }
-
-  .footer-copy strong {
-    font-weight: 700;
-    color: var(--ink);
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(25px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Modals Base Styling */
-  .modal-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(13, 13, 13, 0.92);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .modal-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .modal-wrapper {
-    background: #141414;
-    border: 1px solid var(--accent-border);
-    max-width: 700px;
-    width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
-    padding: clamp(2rem, 5vw, 3.5rem);
-    position: relative;
-    transform: translateY(15px);
-    transition: transform 0.3s ease;
-    border-radius: 4px;
-  }
-
-  .modal-overlay.active .modal-wrapper {
-    transform: translateY(0);
-  }
-
-  .modal-close-btn {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: transparent;
-    border: none;
-    color: var(--ink-soft);
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-
-  .modal-close-btn:hover { color: var(--accent); }
-
-  .modal-tags {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .modal-title-text {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-  }
-
-  .modal-content {
-    color: var(--ink-soft);
-    font-size: 1rem;
-    line-height: 1.7;
-  }
-
-  .modal-content p { margin-bottom: 1.5rem; }
-  
-  .modal-content ul {
-    margin-bottom: 1.5rem;
-    padding-left: 1.25rem;
-  }
-
-  .modal-content li {
-    margin-bottom: 0.5rem;
-  }
-
-  .modal-content a {
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-    font-weight: 500;
-  }
-
-  .modal-content a:hover { border-color: var(--accent); }
-
-  .modal-highlight-box {
-    background: rgba(255, 59, 0, 0.04);
-    border: 1px dashed var(--accent-border);
-    padding: 1.5rem;
-    border-radius: 4px;
-    margin-top: 1.5rem;
-  }
-
-  @media (max-width: 900px) {
-    .hero { padding-top: 6rem; }
-    .work-card.featured-b2b { grid-template-columns: 1fr; }
-    .b2b-right { border-left: none; border-top: 1px solid var(--accent-border); min-height: 200px; flex-direction: row; flex-wrap: wrap; justify-content: center; }
-    .b2b-divider { width: 3rem; height: 1px; }
-    .contact-strip-inner { flex-direction: column; align-items: flex-start; text-align: left; }
-  }
-
-  @media (max-width: 768px) {
-    .nav-right .nav-link { display: none; }
-    .stats-bar { flex-wrap: wrap; }
-    .stat-item { min-width: 50%; border-bottom: 1px solid var(--accent-border); }
-    .stat-item:nth-child(even) { border-right: none; }
-    footer { justify-content: center; text-align: center; }
-  }
-
-  @media (max-width: 480px) {
-    .stat-item { min-width: 100%; border-right: none; }
-    .contact-btn { width: 100%; justify-content: center; }
-  }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+:root {
+--bg: #0D0D0D;
+--ink: #F5F5F5;
+--accent: #FF3B00;
+--accent-light: rgba(255, 59, 0, 0.12);
+--accent-border: rgba(255, 59, 0, 0.3);
+--ink-soft: rgba(245, 245, 245, 0.65);
+--ink-xsoft: rgba(245, 245, 245, 0.25);
+--card-hover: rgba(255, 255, 255, 0.03);
+--serif: 'Playfair Display', Georgia, serif;
+--sans: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
+--gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+background: var(--bg);
+color: var(--ink);
+font-family: var(--sans);
+font-weight: 400;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+overflow-x: hidden;
+}
+
+body::before {
+content: '';
+position: fixed;
+inset: 0;
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+pointer-events: none;
+z-index: 0;
+}
+
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 100;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+padding: 1.25rem clamp(1.5rem, 6vw, 5rem);
+background: rgba(13, 13, 13, 0.85);
+backdrop-filter: blur(14px);
+-webkit-backdrop-filter: blur(14px);
+border-bottom: 1px solid var(--accent-border);
+}
+
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+
+.nav-link {
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--ink-soft);
+text-decoration: none;
+transition: color 0.2s;
+}
+.nav-link:hover { color: var(--accent); }
+
+/* ─── HERO ─── */
+.hero {
+min-height: 100svh;
+display: flex;
+align-items: center;
+border-bottom: 1px solid var(--accent-border);
+position: relative;
+overflow: hidden;
+}
+
+.hero-text {
+display: flex;
+flex-direction: column;
+justify-content: center;
+gap: 1.75rem;
+padding: 8rem clamp(2rem, 6vw, 5rem) 4rem;
+position: relative;
+z-index: 1;
+max-width: 900px;
+}
+
+.hero-eyebrow {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+font-size: 0.72rem;
+font-weight: 700;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+color: var(--accent);
+opacity: 0;
+animation: fadeUp 0.9s 0.1s ease forwards;
+}
+
+.hero-eyebrow::before {
+content: '';
+display: block;
+width: 1.75rem;
+height: 2px;
+background: var(--accent);
+flex-shrink: 0;
+}
+
+.hero-headline {
+font-family: var(--serif);
+font-size: clamp(3.5rem, 6.5vw, 6rem);
+font-weight: 400;
+line-height: 1.05;
+letter-spacing: -0.02em;
+color: var(--ink);
+opacity: 0;
+animation: fadeUp 0.9s 0.2s ease forwards;
+}
+
+.hero-headline em {
+font-style: italic;
+color: var(--accent);
+}
+
+.hero-subtitle {
+font-size: clamp(1rem, 1.8vw, 1.25rem);
+font-weight: 400;
+color: var(--ink-soft);
+line-height: 1.55;
+opacity: 0;
+animation: fadeUp 0.9s 0.28s ease forwards;
+}
+
+.hero-subtitle strong {
+color: var(--ink);
+font-weight: 600;
+}
+
+.hero-funnel {
+display: flex;
+align-items: center;
+gap: 0.6rem;
+font-size: 0.82rem;
+font-weight: 500;
+letter-spacing: 0.06em;
+color: var(--ink-soft);
+opacity: 0;
+animation: fadeUp 0.9s 0.33s ease forwards;
+flex-wrap: wrap;
+}
+
+.funnel-dot {
+color: var(--accent);
+font-size: 1rem;
+}
+
+.hero-meta {
+display: flex;
+flex-direction: column;
+gap: 0.6rem;
+opacity: 0;
+animation: fadeUp 0.9s 0.38s ease forwards;
+}
+
+.hero-meta-row {
+font-size: 0.82rem;
+color: var(--ink-soft);
+font-weight: 300;
+line-height: 1.5;
+}
+
+.hero-meta-row strong {
+color: var(--ink-soft);
+font-weight: 600;
+font-size: 0.72rem;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--accent);
+display: block;
+margin-bottom: 0.2rem;
+}
+
+.hero-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
+opacity: 0;
+animation: fadeUp 0.9s 0.45s ease forwards;
+}
+
+.hero-tag {
+font-size: 0.7rem;
+font-weight: 600;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--ink);
+border: 1px solid var(--accent-border);
+padding: 0.35rem 0.85rem;
+background: transparent;
+border-radius: 40px;
+}
+
+.hero-cta {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+opacity: 0;
+animation: fadeUp 0.9s 0.48s ease forwards;
+margin-top: 0.5rem;
+}
+
+.btn-primary {
+display: inline-flex;
+align-items: center;
+gap: 0.45rem;
+background: var(--accent);
+color: #FFF;
+font-family: var(--sans);
+font-size: 0.85rem;
+font-weight: 700;
+letter-spacing: 0.07em;
+text-transform: uppercase;
+text-decoration: none;
+padding: 1rem 2rem;
+border-radius: 2px;
+border: 1px solid var(--accent);
+transition: all 0.3s ease;
+}
+.btn-primary:hover { background: transparent; color: var(--accent); }
+
+.btn-secondary {
+font-size: 0.85rem;
+font-weight: 600;
+letter-spacing: 0.05em;
+color: var(--ink-soft);
+text-decoration: none;
+border-bottom: 1px solid var(--accent-border);
+padding-bottom: 2px;
+transition: color 0.2s, border-color 0.2s;
+}
+.btn-secondary:hover { color: var(--ink); border-color: var(--accent); }
+
+.hero-footnote {
+display: flex;
+align-items: center;
+gap: 0.6rem;
+font-size: 0.72rem;
+color: var(--ink-xsoft);
+letter-spacing: 0.06em;
+opacity: 0;
+animation: fadeUp 0.9s 0.6s ease forwards;
+}
+.hero-footnote-dot { color: var(--accent-border); }
+
+/* ─── BRANDS ─── */
+.brands-section {
+padding: 0;
+border-bottom: 1px solid var(--ink-xsoft);
+overflow: hidden;
+background: #050505;
+}
+
+.brands-header {
+padding: 2rem clamp(1.5rem, 6vw, 5rem) 0;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+font-size: 0.75rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--ink-soft);
+}
+
+.brands-track-wrapper {
+position: relative;
+width: 100%;
+overflow: hidden;
+padding: 3rem 0;
+}
+
+.brands-track-wrapper::before,
+.brands-track-wrapper::after {
+content: '';
+position: absolute;
+top: 0; bottom: 0;
+width: 150px;
+z-index: 2;
+pointer-events: none;
+}
+.brands-track-wrapper::before { left: 0; background: linear-gradient(to right, #050505, transparent); }
+.brands-track-wrapper::after  { right: 0; background: linear-gradient(to left, #050505, transparent); }
+
+.brands-track {
+display: flex;
+align-items: center;
+gap: 6rem;
+width: max-content;
+animation: scrollBrands 15s linear infinite;
+}
+.brands-track:hover { animation-play-state: paused; }
+
+@keyframes scrollBrands {
+from { transform: translateX(0); }
+to   { transform: translateX(-50%); }
+}
+
+.brand-item {
+height: 70px;
+filter: brightness(0) invert(1) opacity(0.4);
+transition: filter 0.3s ease;
+}
+.brand-item:hover { filter: brightness(0) invert(1) opacity(1); }
+.brand-item img { height: 100%; width: auto; object-fit: contain; }
+
+/* ─── SECTION ─── */
+section { padding: var(--gap) clamp(1.5rem, 6vw, 5rem); }
+
+.section-header {
+display: flex;
+align-items: flex-end;
+justify-content: space-between;
+margin-bottom: clamp(2.5rem, 4vw, 4rem);
+padding-bottom: 1.5rem;
+border-bottom: 1px solid var(--ink-xsoft);
+}
+
+.section-label {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+font-size: 0.75rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--accent);
+}
+.section-label::before {
+content: '';
+display: block;
+width: 1.5rem;
+height: 2px;
+background: var(--accent);
+}
+
+.section-title {
+font-family: var(--serif);
+font-size: clamp(2rem, 4vw, 3.2rem);
+font-weight: 400;
+line-height: 1.15;
+letter-spacing: -0.01em;
+margin-top: 0.5rem;
+}
+
+/* ─── WORKS GRID ─── */
+.works-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+gap: 2rem;
+}
+
+.work-card {
+position: relative;
+padding: 2.5rem;
+background: rgba(255, 255, 255, 0.02);
+border: 1px solid var(--accent-border);
+display: flex;
+flex-direction: column;
+gap: 1.25rem;
+transition: all 0.3s ease;
+cursor: pointer;
+color: inherit;
+border-radius: 4px;
+}
+
+.work-card:hover {
+background: var(--card-hover);
+transform: translateY(-5px);
+box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+border-color: var(--accent);
+}
+
+.card-index {
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 0.14em;
+color: var(--ink-xsoft);
+font-family: var(--sans);
+}
+
+.card-tag {
+display: inline-flex;
+align-items: center;
+font-size: 0.65rem;
+font-weight: 700;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--accent);
+background: var(--accent-light);
+padding: 0.25rem 0.65rem;
+border: 1px solid var(--accent-border);
+width: fit-content;
+border-radius: 20px;
+}
+
+.card-title {
+font-family: var(--serif);
+font-size: clamp(1.2rem, 2vw, 1.5rem);
+font-weight: 400;
+line-height: 1.3;
+color: var(--ink);
+flex-grow: 1;
+}
+
+.card-desc {
+font-size: 0.9rem;
+line-height: 1.65;
+color: var(--ink-soft);
+font-weight: 300;
+}
+
+.card-footer {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-top: 1rem;
+padding-top: 1.25rem;
+border-top: 1px solid var(--ink-xsoft);
+}
+
+.card-cta {
+display: inline-flex;
+align-items: center;
+gap: 0.4rem;
+font-size: 0.75rem;
+font-weight: 700;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+color: var(--ink);
+text-decoration: none;
+transition: color 0.2s;
+background: none;
+border: none;
+cursor: pointer;
+font-family: var(--sans);
+}
+.work-card:hover .card-cta { color: var(--accent); }
+
+.card-arrow {
+font-size: 1rem;
+transition: transform 0.25s ease;
+}
+.work-card:hover .card-arrow { transform: translate(3px, -3px); }
+
+/* ─── FEATURED B2B CARD ─── */
+.work-card.featured-b2b {
+grid-column: 1 / -1;
+display: grid !important;
+grid-template-columns: 1fr 1fr;
+gap: 0;
+padding: 0;
+overflow: hidden;
+background: linear-gradient(135deg, #0a0a0a 0%, #1a0800 100%);
+border: 1px solid var(--accent);
+box-shadow: 0 0 40px rgba(255,59,0,0.15);
+cursor: pointer;
+}
+
+.work-card.featured-b2b:hover {
+box-shadow: 0 0 60px rgba(255,59,0,0.3);
+transform: translateY(-4px);
+}
+
+.b2b-left {
+padding: 3.5rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+gap: 1.5rem;
+position: relative;
+z-index: 1;
+}
+
+.b2b-super-badge {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+font-size: 0.65rem;
+font-weight: 800;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: #000;
+background: var(--accent);
+padding: 0.4rem 1rem;
+width: fit-content;
+border-radius: 2px;
+}
+
+.b2b-title {
+font-family: var(--serif);
+font-size: clamp(1.8rem, 3vw, 2.6rem);
+font-weight: 400;
+line-height: 1.2;
+color: var(--ink);
+}
+.b2b-title em { font-style: italic; color: var(--accent); }
+
+.b2b-desc {
+font-size: 0.95rem;
+line-height: 1.7;
+color: var(--ink-soft);
+font-weight: 300;
+max-width: 44ch;
+}
+
+.b2b-right {
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 2rem;
+background: rgba(255,59,0,0.06);
+border-left: 1px solid var(--accent-border);
+overflow: hidden;
+padding: 3.5rem;
+}
+
+.b2b-right::before {
+content: '';
+position: absolute;
+inset: 0;
+background: radial-gradient(circle at 70% 50%, rgba(255,59,0,0.12) 0%, transparent 70%);
+pointer-events: none;
+}
+
+.b2b-metric {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 0.3rem;
+text-align: center;
+position: relative;
+z-index: 1;
+}
+
+.b2b-metric-number {
+font-family: var(--serif);
+font-size: clamp(2.5rem, 5vw, 4rem);
+font-weight: 400;
+color: var(--accent);
+letter-spacing: -0.03em;
+line-height: 1;
+}
+
+.b2b-metric-label {
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-soft);
+}
+
+.b2b-divider {
+width: 1px;
+height: 3rem;
+background: var(--accent-border);
+position: relative;
+z-index: 1;
+}
+
+/* ─── MODAL ─── */
+.modal-overlay {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.85);
+backdrop-filter: blur(8px);
+z-index: 1000;
+align-items: center;
+justify-content: center;
+padding: 1.5rem;
+}
+
+.modal-overlay.active {
+display: flex;
+}
+
+.modal-box {
+background: #111;
+border: 1px solid var(--accent-border);
+border-radius: 6px;
+max-width: 760px;
+width: 100%;
+max-height: 85vh;
+overflow-y: auto;
+position: relative;
+animation: modalIn 0.3s ease;
+}
+
+@keyframes modalIn {
+from { opacity: 0; transform: translateY(20px) scale(0.97); }
+to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+padding: 2rem 2.5rem 1.5rem;
+border-bottom: 1px solid var(--ink-xsoft);
+position: sticky;
+top: 0;
+background: #111;
+z-index: 1;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 1rem;
+}
+
+.modal-tag {
+display: inline-flex;
+align-items: center;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--accent);
+background: var(--accent-light);
+padding: 0.2/rem 0.6rem;
+border: 1px solid var(--accent-border);
+border-radius: 20px;
+margin-bottom: 0.75rem;
+display: block;
+width: fit-content;
+}
+
+.modal-title {
+font-family: var(--serif);
+font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+font-weight: 400;
+line-height: 1.25;
+color: var(--ink);
+}
+
+.modal-close {
+background: none;
+border: 1px solid var(--ink-xsoft);
+color: var(--ink-soft);
+width: 2.2rem;
+height: 2.2rem;
+border-radius: 50%;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.1rem;
+flex-shrink: 0;
+transition: all 0.2s;
+margin-top: 0.2rem;
+}
+.modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+.modal-body {
+padding: 2rem 2.5rem 2.5rem;
+font-size: 0.92rem;
+line-height: 1.8;
+color: var(--ink-soft);
+font-weight: 300;
+}
+
+.modal-body h3 {
+font-family: var(--serif);
+font-size: 1.15rem;
+font-weight: 400;
+color: var(--ink);
+margin: 1.5rem 0 0.75rem;
+}
+
+.modal-body h3:first-child { margin-top: 0; }
+
+.modal-body p { margin-bottom: 1rem; }
+.modal-body p:last-child { margin-bottom: 0; }
+
+.modal-body ul {
+padding-left: 1.25rem;
+margin-bottom: 1rem;
+}
+
+.modal-body ul li {
+margin-bottom: 0.4rem;
+}
+
+.modal-body a {
+color: var(--accent);
+text-decoration: none;
+border-bottom: 1px solid var(--accent-border);
+transition: border-color 0.2s;
+}
+.modal-body a:hover { border-color: var(--accent); }
+
+.modal-body strong {
+color: var(--ink);
+font-weight: 600;
+}
+
+.modal-body .highlight-box {
+background: var(--accent-light);
+border: 1px solid var(--accent-border);
+border-radius: 4px;
+padding: 1rem 1.25rem;
+margin: 1.25rem 0;
+}
+
+/* ─── CONTACT ─── */
+.contact-strip {
+background: #111;
+padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+border-top: 1px solid var(--accent-border);
+}
+
+.contact-strip-inner {
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 3rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.contact-eyebrow {
+display: block;
+font-size: 0.75rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--accent);
+margin-bottom: 0.75rem;
+}
+
+.contact-headline {
+font-family: var(--serif);
+font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+font-weight: 400;
+color: var(--ink);
+line-height: 1.1;
+}
+
+.contact-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.contact-btn {
+display: inline-flex;
+align-items: center;
+gap: 0.6rem;
+font-family: var(--sans);
+font-size: 0.85rem;
+font-weight: 700;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+text-decoration: none;
+padding: 1rem 2rem;
+border-radius: 2px;
+transition: all 0.3s ease;
+}
+
+.contact-btn--whatsapp {
+background: #25D366;
+color: #000;
+border: 1px solid #25D366;
+}
+.contact-btn--whatsapp:hover { background: transparent; color: #25D366; }
+
+.contact-btn--linkedin {
+background: #0A66C2;
+color: #FFF;
+border: 1px solid #0A66C2;
+}
+.contact-btn--linkedin:hover { background: transparent; color: #0A66C2; }
+
+footer {
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 1rem;
+padding: 2.5rem clamp(1.5rem, 6vw, 5rem);
+background: #000;
+}
+
+.footer-copy { font-size: 0.85rem; color: var(--ink-soft); letter-spacing: 0.04em; }
+.footer-copy strong { font-weight: 700; color: var(--ink); }
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+.reveal {
+opacity: 0;
+transform: translateY(25px);
+transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+.hero { padding-top: 6rem; }
+.work-card.featured-b2b { grid-template-columns: 1fr; }
+.b2b-right { border-left: none; border-top: 1px solid var(--accent-border); min-height: 200px; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+.b2b-divider { width: 3rem; height: 1px; }
+.contact-strip-inner { flex-direction: column; align-items: flex-start; text-align: left; }
+}
+
+@media (max-width: 768px) {
+.nav-right .nav-link { display: none; }
+footer { justify-content: center; text-align: center; }
+.modal-header, .modal-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+.contact-btn { width: 100%; justify-content: center; }
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-right">
-    <a href="#work" class="nav-link">Projetos</a>
-    <a href="#contact" class="nav-link">Contato</a>
-  </div>
+<div class="nav-right">
+<a href="#work" class="nav-link">Projetos</a>
+<a href="#contact" class="nav-link">Contato</a>
+</div>
 </nav>
 
 <div class="hero">
-  <div class="hero-text">
-    <span class="hero-eyebrow">Portfólio · 2026</span>
-    <div class="hero-name-block">
-      <span class="hero-name-label">Olá, sou o</span>
-      <h1 class="hero-headline">
-        Rodolfo<br>
-        <em>Correa.</em>
-      </h1>
-    </div>
-    <p class="hero-bio">
-      Analista de comunicação e marketing com experiência em projetos editoriais, branding e estratégias de inbound e outbound.
-      Passei por rádio e TV e cheguei à estratégia digital. Combino visão analítica com escrita persuasiva para gerar resultados reais.
-    </p>
-    <div class="hero-tags">
-      <span class="hero-tag">Branding</span>
-      <span class="hero-tag">Inbound</span>
-      <span class="hero-tag">Outbound</span>
-      <span class="hero-tag">Audiovisual</span>
-      <span class="hero-tag">Social Media</span>
-    </div>
-    <div class="hero-cta">
-      <a href="#work" class="btn-primary">
-        Ver Trabalhos
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 4l3.5 3-3.5 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="#contact" class="btn-secondary">Falar comigo →</a>
-    </div>
-    <div class="hero-footnote">
-      <span>Maringá · PR</span>
-      <span class="hero-footnote-dot">·</span>
-      <span>Disponível para projetos</span>
-    </div>
-  </div>
+<div class="hero-text">
+<span class="hero-eyebrow">Portfólio · 2026</span>
+
+<h1 class="hero-headline">
+Rodolfo<br>
+<em>Correa.</em>
+</h1>
+
+<p class="hero-subtitle" style="opacity:0;animation:fadeUp 0.9s 0.25s ease forwards;">
+<strong>Estrategista de Aquisição e Conteúdo · Copywriter</strong>
+</p>
+
+<div class="hero-funnel">
+<span>Experiência nas 3 etapas do Funil</span>
+<span class="funnel-dot">·</span>
+<span>Atração</span>
+<span class="funnel-dot">·</span>
+<span>Interesse</span>
+<span class="funnel-dot">·</span>
+<span>Conversão</span>
 </div>
 
-<div class="stats-bar">
-  <div class="stat-item">
-    <span class="stat-number">10+</span>
-    <span class="stat-label">Projetos Documentados</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">5+</span>
-    <span class="stat-label">Segmentos de Atuação</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">360°</span>
-    <span class="stat-label">Visão Estratégica</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">∞</span>
-    <span class="stat-label">Foco em Resultado</span>
-  </div>
+<div class="hero-meta">
+<div class="hero-meta-row">
+<strong>Formação</strong>
+Comunicação Social com ênfase em Publicidade
+</div>
+<div class="hero-meta-row">
+<strong>Ferramentas</strong>
+RD Station · Canva · Photoshop · CapCut · Claude · Gemini · Meta Ads · Google Analytics
+</div>
+</div>
+
+<div class="hero-cta">
+<a href="#work" class="btn-primary">
+Ver Projetos
+<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 4l3.5 3-3.5 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+<a href="#contact" class="btn-secondary">Falar comigo →</a>
+</div>
+
+<div class="hero-footnote">
+<span>Maringá · PR</span>
+<span class="hero-footnote-dot">·</span>
+<span>Disponível para projetos</span>
+</div>
+</div>
 </div>
 
 <div class="brands-section">
-  <div class="brands-header">Marcas com quem trabalhei</div>
-  <div class="brands-track-wrapper">
-    <div class="brands-track" id="brandsTrack">
-      <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/rpc-globo.png" alt="RPC Globo"></div>
-      <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/SICREDI.png" alt="Sicredi"></div>
-      <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar"></div>
-      <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/Acim.png" alt="Acim"></div>
-      <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/rpc-globo.png" alt="RPC Globo"></div>
-      <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/SICREDI.png" alt="Sicredi"></div>
-      <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar"></div>
-      <div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/Acim.png" alt="Acim"></div>
-    </div>
-  </div>
+<div class="brands-header">Marcas com quem trabalhei</div>
+<div class="brands-track-wrapper">
+<div class="brands-track" id="brandsTrack">
+<div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/rpc-globo.png" alt="RPC Globo"></div>
+<div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/SICREDI.png" alt="Sicredi"></div>
+<div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar"></div>
+<div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/Acim.png" alt="Acim"></div>
+<div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/rpc-globo.png" alt="RPC Globo"></div>
+<div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/SICREDI.png" alt="Sicredi"></div>
+<div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/COCAMAR.png" alt="Cocamar"></div>
+<div class="brand-item"><img src="https://raw.githubusercontent.com/rodolfocorrearc/portfolio/main/Acim.png" alt="Acim"></div>
+</div>
+</div>
 </div>
 
 <section id="work">
-  <div class="section-header reveal">
-    <div>
-      <span class="section-label">Seleção de Trabalhos</span>
-      <h2 class="section-title">Projetos em Destaque</h2>
-    </div>
-  </div>
+<div class="section-header reveal">
+<div>
+<span class="section-label">Portfólio</span>
+<h2 class="section-title">O que eu posso fazer<br>pela sua empresa?</h2>
+</div>
+</div>
 
-  <div class="works-grid">
+<div class="works-grid">
 
-    <div class="work-card featured-b2b reveal" onclick="openModal('modal-b2b')">
-      <div class="b2b-left">
-        <div class="b2b-super-badge">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          Case de Resultado
-        </div>
-        <div style="display:flex;align-items:center;gap:0.75rem">
-          <span class="card-index" style="color:rgba(255,59,0,0.5)">01</span>
-          <span class="card-tag">B2B · Vendas · Estratégia</span>
-        </div>
-        <h2 class="b2b-title">Estratégia de<br>Aquisição <em>B2B</em><br>— Software House</h2>
-        <p class="b2b-desc">Estruturação completa de uma estratégia de aquisição B2B que, em apenas 15 dias, gerou uma venda de mais de R$ 30 mil para uma Software House.</p>
-        <div class="card-footer" style="border-top-color:var(--accent-border);margin-top:0.5rem">
-          <span class="card-cta">Ver detalhes do case <span class="card-arrow">↗</span></span>
-        </div>
-      </div>
-      <div class="b2b-right">
-        <div class="b2b-metric">
-          <span class="b2b-metric-number">R$30k</span>
-          <span class="b2b-metric-label">Venda Gerada / 15 dias</span>
-        </div>
-        <div class="b2b-divider"></div>
-        <div class="b2b-metric">
-          <span class="b2b-metric-number">B2B</span>
-          <span class="b2b-metric-label">Software House</span>
-        </div>
-        <div class="b2b-divider"></div>
-        <div class="b2b-metric">
-          <span class="b2b-metric-number">360°</span>
-          <span class="b2b-metric-label">Estratégia Completa</span>
-        </div>
-      </div>
-    </div>
+<div class="work-card featured-b2b reveal" onclick="openModal('modal-b2b')">
+<div class="b2b-left">
+<div class="b2b-super-badge">
+<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+Case de Resultado
+</div>
+<div style="display:flex;align-items:center;gap:0.75rem">
+<span class="card-index" style="color:rgba(255,59,0,0.5)">01</span>
+<span class="card-tag">B2B · Vendas · Estratégia</span>
+</div>
+<h2 class="b2b-title">Estratégia de conversão de leads qualificados que gerou um contrato fechado de mais de <em>R$ 30 mil</em> para uma Software House</h2>
+<div class="card-footer" style="border-top-color:var(--accent-border);margin-top:0.5rem">
+<button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
+</div>
+</div>
+<div class="b2b-right">
+<div class="b2b-metric">
+<span class="b2b-metric-number">R$30k</span>
+<span class="b2b-metric-label">Venda Gerada / 15 dias</span>
+</div>
+<div class="b2b-divider"></div>
+<div class="b2b-metric">
+<span class="b2b-metric-number">B2B</span>
+<span class="b2b-metric-label">Software House</span>
+</div>
+<div class="b2b-divider"></div>
+<div class="b2b-metric">
+<span class="b2b-metric-number">360°</span>
+<span class="b2b-metric-label">Estratégia Completa</span>
+</div>
+</div>
+</div>
 
-    <div class="work-card reveal" onclick="openModal('modal-sicredi-investor')">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">02</span>
-        <span class="card-tag">Evento · Institucional</span>
-      </div>
-      <h3 class="card-title">Primeiro Dexis Investor Day — Sicredi</h3>
-      <p class="card-desc">Estratégia de comunicação e produção de conteúdo para o primeiro evento institucional voltado a investidores da cooperativa Sicredi Dexis, com foco em posicionamento e credibilidade financeira.</p>
-      <div class="card-footer">
-        <span class="card-cta">Saber mais <span class="card-arrow">↗</span></span>
-      </div>
-    </div>
+<div class="work-card reveal" onclick="openModal('modal-g1')">
+<div style="display:flex;align-items:center;gap:0.75rem">
+<span class="card-index">02</span>
+<span class="card-tag">Copywriting</span>
+</div>
+<h3 class="card-title">Textos Publicitários no G1</h3>
+<p class="card-desc">Matérias produzidas para o Especial Publicitário do portal G1, com foco em comunicação institucional e editorial para a Associação Comercial de Maringá.</p>
+<div class="card-footer">
+<button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
+</div>
+</div>
 
-    <div class="work-card reveal" onclick="openModal('modal-cocamar')">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">03</span>
-        <span class="card-tag">Branding · Social</span>
-      </div>
-      <div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#FFB300;background:rgba(255,179,0,0.1);padding:0.2rem 0.6rem;border:1px solid rgba(255,179,0,0.3);border-radius:20px;width:fit-content">
-        <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        Premiado
-      </div>
-      <h3 class="card-title">A Solidariedade é a Nossa Energia — Cocamar</h3>
-      <p class="card-desc">Entrega de sistemas de energia fotovoltaica para 17 entidades assistenciais dos estados do Paraná, São Paulo e Mato Grosso do Sul, em 2023.</p>
-      <div class="card-footer">
-        <span class="card-cta">Saber mais <span class="card-arrow">↗</span></span>
-      </div>
-    </div>
+<div class="work-card reveal" onclick="openModal('modal-cocamar')">
+<div style="display:flex;align-items:center;gap:0.75rem">
+<span class="card-index">03</span>
+<span class="card-tag">Planejamento de Comunicação</span>
+</div>
+<div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#FFB300;background:rgba(255,179,0,0.1);padding:0.2rem 0.6rem;border:1px solid rgba(255,179,0,0.3);border-radius:20px;width:fit-content">
+<svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+Projeto Premiado
+</div>
+<h3 class="card-title">A Solidariedade é a nossa Energia — Cocamar</h3>
+<p class="card-desc">Comunicação de projeto social premiado com entrega de energia fotovoltaica a 17 entidades assistenciais em 3 estados.</p>
+<div class="card-footer">
+<button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
+</div>
+</div>
 
-    <div class="work-card reveal" onclick="openModal('modal-g1')">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">04</span>
-        <span class="card-tag">Mídia · Editorial</span>
-      </div>
-      <h3 class="card-title">G1 — Especial Publicitário</h3>
-      <p class="card-desc">Produção de conteúdo especial para o portal G1 com formato editorial publicitário, integrando jornalismo e branding de forma orgânica e de alta credibilidade.</p>
-      <div class="card-footer">
-        <span class="card-cta">Saber mais <span class="card-arrow">↗</span></span>
-      </div>
-    </div>
+<div class="work-card reveal" onclick="openModal('modal-rpc')">
+<div style="display:flex;align-items:center;gap:0.75rem">
+<span class="card-index">04</span>
+<span class="card-tag">Promoções e Eventos</span>
+</div>
+<h3 class="card-title">RPC — Afiliada TV Globo</h3>
+<p class="card-desc">4 anos como Assistente de Direção na equipe de Promoções e Eventos, com participação em projetos de grande alcance no Paraná.</p>
+<div class="card-footer">
+<button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
+</div>
+</div>
 
-    <div class="work-card reveal" onclick="openModal('modal-outbound')">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">05</span>
-        <span class="card-tag">Vendas · Estratégia</span>
-      </div>
-      <h3 class="card-title">Trilha do Outbound</h3>
-      <p class="card-desc">Estruturação de uma trilha completa de estratégia outbound para prospecção activa, com cadências, scripts e ferramentas de inteligência comercial aplicadas.</p>
-      <div class="card-footer">
-        <span class="card-cta">Saber mais <span class="card-arrow">↗</span></span>
-      </div>
-    </div>
+<div class="work-card reveal" onclick="openModal('modal-audiovisual')">
+<div style="display:flex;align-items:center;gap:0.75rem">
+<span class="card-index">05</span>
+<span class="card-tag">Audiovisual</span>
+</div>
+<h3 class="card-title">Roteiros audiovisuais para diversas empresas</h3>
+<p class="card-desc">Roteiros, direção de gravação e edição colaborativa para Sicredi Dexis, Acim, Cocamar e outras marcas.</p>
+<div class="card-footer">
+<button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
+</div>
+</div>
 
-    <div class="work-card reveal" onclick="openModal('modal-vibe-coding')">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">06</span>
-        <span class="card-tag">Tech · Produto</span>
-      </div>
-      <h3 class="card-title">Desenvolvimento Ágil de Landing Pages — Vibe Coding</h3>
-      <p class="card-desc">Metodologia de desenvolvimento acelerado de landing pages usando vibe coding, com foco em velocidade de entrega, conversão e prototipagem orientada a resultado.</p>
-      <div class="card-footer">
-        <span class="card-cta">Saber mais <span class="card-arrow">↗</span></span>
-      </div>
-    </div>
+<div class="work-card reveal" onclick="openModal('modal-domen')">
+<div style="display:flex;align-items:center;gap:0.75rem">
+<span class="card-index">06</span>
+<span class="card-tag">Estratégia de Rebranding</span>
+</div>
+<div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#FFB300;background:rgba(255,179,0,0.1);padding:0.2rem 0.6rem;border:1px solid rgba(255,179,0,0.3);border-radius:20px;width:fit-content">
+<svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.854 3.756 4.146.603-3 2.924.708 4.127L8 10.25l-3.708 1.16.708-4.127-3-2.924 4.146-.603L8 1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+Case de Sucesso
+</div>
+<h3 class="card-title">Rebranding Completo e Lançamento da Domen Store, Arapongas/PR</h3>
+<p class="card-desc">Transição completa de marca infantil para moda masculina premium, de ponta a ponta — naming, identidade, experiência e lançamento.</p>
+<div class="card-footer">
+<button class="card-cta">Ver mais <span class="card-arrow">↗</span></button>
+</div>
+</div>
 
-    <div class="work-card reveal" onclick="openModal('modal-rpc')">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">07</span>
-        <span class="card-tag">TV · Audiovisual</span>
-      </div>
-      <h3 class="card-title">RPC — Afiliada TV Globo</h3>
-      <p class="card-desc">Produção de conteúdo e estratégia de comunicação para a RPC, afiliada da TV Globo no Paraná, com foco em audiência e posicionamento regional de marca.</p>
-      <div class="card-footer">
-        <span class="card-cta">Saber mais <span class="card-arrow">↗</span></span>
-      </div>
-    </div>
-
-    <div class="work-card reveal" onclick="openModal('modal-sicredi-sede')">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">08</span>
-        <span class="card-tag">Institucional</span>
-      </div>
-      <h3 class="card-title">Nova Sede — Sicredi Dexis</h3>
-      <p class="card-desc">Planejamento e execução da comunicação para a inauguração da nova sede da Sicredi Dexis, incluindo narrativa institucional, materiais gráficos e cobertura do evento.</p>
-      <div class="card-footer">
-        <span class="card-cta">Saber mais <span class="card-arrow">↗</span></span>
-      </div>
-    </div>
-
-    <div class="work-card reveal" onclick="openModal('modal-mega-outlet')">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">09</span>
-        <span class="card-tag">Varejo · Evento</span>
-      </div>
-      <h3 class="card-title">Mega Outlet 2024</h3>
-      <p class="card-desc">Estratégia de comunicação para o Mega Outlet 2024, cobrindo posicionamento de marca, divulgação multicanal e ativações que maximizaram o fluxo e o engajamento do público.</p>
-      <div class="card-footer">
-        <span class="card-cta">Saber mais <span class="card-arrow">↗</span></span>
-      </div>
-    </div>
-
-    <div class="work-card reveal" onclick="openModal('modal-audiovisual')">
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <span class="card-index">10</span>
-        <span class="card-tag">Vídeo · Production</span>
-      </div>
-      <h3 class="card-title">Audiovisuais</h3>
-      <p class="card-desc">Portfólio de produções audiovisuais — roteiro, direção e estratégia de conteúdo em vídeo para marcas, eventos e plataformas digitais com diferentes objetivos comunicacionais.</p>
-      <div class="card-footer">
-        <span class="card-cta">Saber mais <span class="card-arrow">↗</span></span>
-      </div>
-    </div>
-
-  </div>
+</div>
 </section>
 
 <section id="contact" class="contact-strip">
-  <div class="contact-strip-inner reveal">
-    <div>
-      <span class="contact-eyebrow">Vamos conversar?</span>
-      <h2 class="contact-headline">Pronto para o<br>próximo passo.</h2>
-    </div>
-    <div class="contact-actions">
-      <a href="https://wa.me/554491724857" target="_blank" rel="noopener" class="contact-btn contact-btn--whatsapp">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.663-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-        </svg>
-        WhatsApp
-      </a>
-      <a href="https://linkedin.com/in/rodolffocorrea" target="_blank" rel="noopener" class="contact-btn contact-btn--linkedin">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-        LinkedIn
-      </a>
-    </div>
-  </div>
+<div class="contact-strip-inner reveal">
+<div>
+<span class="contact-eyebrow">Vamos conversar?</span>
+<h2 class="contact-headline">Pronto para o<br>próximo passo.</h2>
+</div>
+<div class="contact-actions">
+<a href="https://wa.me/5544991724857" target="_blank" rel="noopener" class="contact-btn contact-btn--whatsapp">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.663-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+WhatsApp
+</a>
+<a href="https://linkedin.com/in/rodolffocorrea" target="_blank" rel="noopener" class="contact-btn contact-btn--linkedin">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+LinkedIn
+</a>
+</div>
+</div>
 </section>
 
 <footer>
-  <p class="footer-copy">
-    <strong>Rodolfo Correa</strong> © 2026
-  </p>
+<p class="footer-copy"><strong>Rodolfo Correa</strong> © 2026</p>
 </footer>
 
-
 <div class="modal-overlay" id="modal-b2b" onclick="closeModalOnOverlay(event, 'modal-b2b')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-b2b')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">B2B · Vendas · Estratégia</span>
-    </div>
-    <h2 class="modal-title-text">Estratégia de conversão de leads qualificados — Software House</h2>
-    <div class="modal-content">
-      <p>Desenvolvimento e execução de estratégia focada em otimização do funil de conversão corporativo (Atração, Interesse e Conversão), resultando no fechamento definitivo de um contrato de R$ 30 mil em apenas 15 dias.</p>
-      
-      <div class="modal-highlight-box">
-        <strong>Confira os materiais detalhados do projeto:</strong><br><br>
-        • Acesse a documentação estruturada e metas no <a href="https://www.notion.so/rodolfocorrea/Estrat-gia-de-Aquisi-o-B2B-venda-R-30-mil-Software-House-36d943d2d80780749521d9a9f96531bc?v=12f943d2d80781288bb8000c7a8b241d&source=copy_link" target="_blank">Notion do Case ↗</a>.<br>
-        • Veja o carrossel explicativo do passo a passo no meu <a href="https://www.linkedin.com/posts/rodolffocorrea_b2b-vendas-marketingdigital-activity-7193959828453478401-M8Vj?utm_source=share&utm_medium=member_desktop" target="_blank">LinkedIn Post ↗</a>.
-      </div>
-    </div>
-  </div>
+<div class="modal-box">
+<div class="modal-header">
+<div>
+<span class="modal-tag">Case de Resultado</span>
+<h2 class="modal-title">Estratégia de conversão de leads qualificados que gerou um contrato fechado de mais de R$ 30 mil para uma Software House</h2>
 </div>
-
-<div class="modal-overlay" id="modal-sicredi-investor" onclick="closeModalOnOverlay(event, 'modal-sicredi-investor')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-sicredi-investor')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">Evento · Institucional</span>
-    </div>
-    <h2 class="modal-title-text">Primeiro Dexis Investor Day — Sicredi</h2>
-    <div class="modal-content">
-      <p>Planejamento de comunicação integrada e produção de conteúdo de alto nível para o primeiro evento institucional voltado a grandes investidores da cooperativa Sicredi Dexis. O foco centrou-se em reforçar o posicionamento de mercado e a sólida credibilidade financeira da marca.</p>
-      
-      <p>Acesse o detalhamento estratégico completo no link abaixo:</p>
-      <ul>
-        <li><a href="https://www.notion.so/Primeiro-Dexis-Investor-Day-Sicredi-12f943d2d80780a59df4e74ff9978dc7?pvs=25" target="_blank">Documentação Completa no Notion ↗</a></li>
-      </ul>
-    </div>
-  </div>
+<button class="modal-close" onclick="closeModal('modal-b2b')">✕</button>
 </div>
+<div class="modal-body">
+<p>Em 2025, assumi o desafio de estruturar a estratégia de aquisição de leads para uma software house sediada em Maringá/PR.
+A empresa enfrentava um obstáculo comum no mercado de tecnologia B2B: o ticket médio elevado dos serviços tradicionais de desenvolvimento limitava o volume de novos clientes e gerava um ciclo de vendas longo e complexo.
+Havia a necessidade urgente de diversificar o portfólio para abrir novos canais de receita.</p>
 
-<div class="modal-overlay" id="modal-cocamar" onclick="closeModalOnOverlay(event, 'modal-cocamar')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-cocamar')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">Branding · Social</span>
-    </div>
-    <h2 class="modal-title-text">A Solidariedade é a Nossa Energia — Cocamar</h2>
-    <div class="modal-content">
-      <p>Desenvolvimento e cobertura do plano de comunicação para a iniciativa sustentável e de responsabilidade social da Cocamar em 2023. O projeto estruturou a entrega e instalação de sistemas de energia fotovoltaica para 17 entidades assistenciais distribuídas entre os estados do Paraná, São Paulo e Mato Grosso do Sul.</p>
-      
-      <p>Explore o case e a repercussão oficial:</p>
-      <ul>
-        <li><a href="https://rodolfocorrea.notion.site/A-Solidariedade-a-Nossa-Energia-Cocamar-12f943d2d8078116b36bcffc1bd58f10?pvs=25" target="_blank">Estratégia e Métricas no Notion ↗</a></li>
-        <li><a href="https://www.cocamar.com.br/noticia/projeto-da-cocamar-de-energia-fotovoltaica-para-entidades-ganha-premio-nacional" target="_blank">Matéria de Premiação Nacional no Portal Cocamar ↗</a></li>
-      </ul>
-    </div>
-  </div>
+<h3>A Solução Estratégica</h3>
+<p>A resposta para o problem não foi apenas mudar o discurso, mas criar uma nova oferta de entrada.
+Juntos, criamos um modelo de Desenvolvimento de Software Baseado em Inteligência Artificial, focado em pequenas e médias empresas.</p>
+<p>O objetivo principal era entregar a mesma eficiência e robustez de um projeto sob medida tradicional, mas com um tempo de entrega reduzido e um custo significativamente mais acessível.</p>
+<p>Para viabilizar o projeto, conduzi as seguintes etapas:</p>
+<ul>
+<li><strong>Alinhamento Executivo:</strong> Participei de reuniões estratégicas com o time técnico e a diretoria para apresentar a análise de mercado, o mapeamento do público-alvo, o escopo técnico do serviço e o naming do produto.</li>
+<li><strong>Validação de Mercado (MVP):</strong> Com a primeira versão do escopo aprovada, desenvolvemos uma Landing Page focada na dor do cliente e estruturamos campanhas de tráfego pago para testar o público-alvo em tempo real.</li>
+</ul>
+
+<h3>Os Resultados e a Tração</h3>
+<p>O impacto da estratégia foi imediato e superou as expectativas iniciais de validação:</p>
+<div class="highlight-box">
+<strong>Primeira Venda em 15 Dias:</strong> Logo nas duas primeiras semanas de campanha, captamos um lead qualificado vindo de Belém do Pará.
+O contato evoluiu rapidamente para a mesa de negociação, resultando no fechamento de um contrato de mais de R$ 30 mil.
+Este marco representou a primeira venda da software house originada 100% via canais de marketing.
+</div>
+<p><strong>Expansão para Eventos Nacionais:</strong> Utilizando os dados de tração inicial, mapeei oportunidades presenciais e identificamos a Feira do Empreendedor do SEBRAE em São Paulo (2025) como o palco ideal.
+Em tempo recorde, estruturamos a operação interna e o material de vendas para expor e escalar o novo serviço no maior evento de empreendedorismo do país.</p>
+
+<h3>O Impacto Atual</h3>
+<p>O que começou como um teste de validação de mercado transformou-se na principal engrenagem de crescimento da empresa.
+Hoje, o serviço de Desenvolvimento com IA é o principal carro-chefe da software house, provando que o alinhamento entre posicionamento de mercado, produto certo e canais de aquisição eficientes é a chave para destravar o crescimento de empresas de tecnologia.</p>
+<p>🔗 <a href="https://lughy.com.br" target="_blank" rel="noopener">Conheça o projeto atual: Lughy — Desenvolvimento com IA</a></p>
+</div>
+</div>
 </div>
 
 <div class="modal-overlay" id="modal-g1" onclick="closeModalOnOverlay(event, 'modal-g1')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-g1')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">Mídia · Editorial</span>
-    </div>
-    <h2 class="modal-title-text">G1 — Especial Publicitário</h2>
-    <div class="modal-content">
-      <p>Produção especializada de conteúdos publieditoriais e matérias especiais de alto impacto para o portal G1. O trabalho aliou técnicas de jornalismo corporativo e conceitos de branding para criar narrativas orgânicas de grande relevância institucional para a Associação Comercial de Maringá.</p>
-      
-      <p>Confira a análise do projeto e as publicações ao vivo:</p>
-      <ul>
-        <li><a href="https://www.notion.so/G1-Especial-Publicit-rio-130943d2d8078029ae68d080e3127eac?pvs=25" target="_blank">Análise Editorial e Estrutura no Notion ↗</a></li>
-        <li><a href="https://g1.globo.com/pr/norte-na-fronteira/especial-publicitario/acim/noticia/2023/11/17/maringa-encantada-parceria-entre-acim-e-prefeitura-promete-aquecer-o-comercio-local.ghtml" target="_blank">Matéria G1: Parceria ACIM e Prefeitura (Maringá Encantada) ↗</a></li>
-        <li><a href="https://g1.globo.com/pr/norte-na-fronteira/especial-publicitario/acim/noticia/2023/10/24/comercio-de-maringa-tera-horario-especial-para-o-fim-de-ano.ghtml" target="_blank">Matéria G1: Horário Especial de Fim de Ano ↗</a></li>
-      </ul>
-    </div>
-  </div>
+<div class="modal-box">
+<div class="modal-header">
+<div>
+<span class="modal-tag">Copywriting</span>
+<h2 class="modal-title">Textos Publicitários no G1</h2>
+</div>
+<button class="modal-close" onclick="closeModal('modal-g1')">✕</button>
+</div>
+<div class="modal-body">
+<p>O portal de notícias G1 possui o "Especial Publicitário", um espaço dedicado à divulgação de negócios.
+Em 2024, tive a oportunidade de escrever algumas matérias para a Associação Comercial de Maringá — Acim, que foram publicadas nesse espaço.</p>
+<p>Leia as matérias clicando nos links abaixo:</p>
+<ul>
+<li><a href="https://g1.globo.com/pr/norte-noroeste/especial-publicitario/acim/acim/noticia/2024/10/13/conflito-de-geracoes-desafia-o-mercado-de-trabalho.ghtml" target="_blank" rel="noopener">Conflito de gerações no mercado de trabalho</a></li>
+<li><a href="https://g1.globo.com/pr/norte-noroeste/especial-publicitario/acim/acim/noticia/2024/10/15/devedores-estao-quitando-suas-dividas-apos-notificacao-do-spc.ghtml" target="_blank" rel="noopener">Devedores quitam dívidas após notificação do SPC</a></li>
+<li><a href="https://g1.globo.com/pr/norte-noroeste/especial-publicitario/acim/acim/noticia/2024/10/15/devedores-estao-quitando-suas-dividas-apos-notificacao-do-spc.ghtml" target="_blank" rel="noopener">Acim: conectada ao desenvolvimento econômico e social de Maringá e região</a></li>
+</ul>
+</div>
+</div>
 </div>
 
-<div class="modal-overlay" id="modal-outbound" onclick="closeModalOnOverlay(event, 'modal-outbound')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-outbound')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">Vendas · Estratégia</span>
-    </div>
-    <h2 class="modal-title-text">Trilha do Outbound Marketing</h2>
-    <div class="modal-content">
-      <p>Desenho e documentação de uma arquitetura completa de outbound marketing voltada à prospecção comercial ativa. A trilha engloba o mapeamento de fluxos de cadência multimídia, roteiros avançados de abordagem (cold calling e cold mailing) e seleção de softwares modernos de inteligência comercial B2B.</p>
-      
-      <p>Veja os fluxogramas e frameworks aplicados:</p>
-      <ul>
-        <li><a href="https://notion.so/Trilha-do-Outbound-342943d2d8078030bc30cd1454d86084?pvs=25" target="_blank">Framework Completo no Notion ↗</a></li>
-      </ul>
-    </div>
-  </div>
+<div class="modal-overlay" id="modal-cocamar" onclick="closeModalOnOverlay(event, 'modal-cocamar')">
+<div class="modal-box">
+<div class="modal-header">
+<div>
+<span class="modal-tag">Planejamento de Comunicação · Projeto Premiado</span>
+<h2 class="modal-title">A Solidariedade é a nossa Energia — Cocamar</h2>
 </div>
+<button class="modal-close" onclick="closeModal('modal-cocamar')">✕</button>
+</div>
+<div class="modal-body">
+<h3>O Projeto ☀️</h3>
+<p>Fui um dos responsáveis pela comunicação do projeto "A solidariedade é a nossa energia", da Cocamar, que realizou a entrega de sistemas de energia fotovoltaica para 17 entidades assistenciais dos estados do Paraná, São Paulo e Mato Grosso do Sul, em 2023. Os recursos para esse fim são provenientes do Fates (Fundo de Assistência Técnica, Educacional e Social) recolhido pela cooperativa.</p>
 
-<div class="modal-overlay" id="modal-vibe-coding" onclick="closeModalOnOverlay(event, 'modal-vibe-coding')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-vibe-coding')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">Tech · Produto</span>
-    </div>
-    <h2 class="modal-title-text">Desenvolvimento Ágil de Landing Pages — Vibe Coding</h2>
-    <div class="modal-content">
-      <p>Aplicação prática de metodologias aceleradas baseadas em inteligência artificial e processos ágeis de "vibe coding". Foco total na rápida prototipagem, testes rápidos de hipóteses em canais digitais, excelente performance de carregamento e foco estrito em conversão de tráfego.</p>
-      
-      <p>Confira a documentação técnica e os conceitos utilizados:</p>
-      <ul>
-        <li><a href="https://notion.so/Desenvolvimento-gil-de-Landing-Pages-Vibe-Coding-364943d2d80780068d86e70fbfdc72ba?pvs=25" target="_blank">Acessar Notas de Desenvolvimento no Notion ↗</a></li>
-      </ul>
-    </div>
-  </div>
+<h3>Tarefas Executadas 📋</h3>
+<ul>
+<li>Plano de Comunicação</li>
+<li>Briefing</li>
+<li>Aprovação da ID e peças (convites, backdrop, placas, troféus…)</li>
+<li>Logística</li>
+<li>Cotação de gráficas, produtoras de vídeo e fotógrafos</li>
+<li>Roteiro</li>
+</ul>
+
+<h3>Playlist 🎥</h3>
+<p>O objetivo principal da captação audiovisual desse projeto foi a Prestação de Contas aos cooperados da Cocamar.</p>
+<p><a href="https://youtube.com/playlist?list=PLKocVaA5VA7AO9BSBipJm_xsIGwp8WsXr&si=85-Jzx0BG-zC3gYP" target="_blank" rel="noopener">▶ Assista a playlist completa aqui</a></p>
+
+<h3>Reconhecimento 🏆</h3>
+<div class="highlight-box">
+Melhor Projeto Ambiental na Certificação Selo ODS 2023, pela Associação Comercial e Empresarial de Maringá (Acim), durante o Summit 2023 – Jornada de Impacto.
+</div>
+</div>
+</div>
 </div>
 
 <div class="modal-overlay" id="modal-rpc" onclick="closeModalOnOverlay(event, 'modal-rpc')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-rpc')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">TV · Audiovisual</span>
-    </div>
-    <h2 class="modal-title-text">RPC — Afiliada TV Globo (4 anos de atuação)</h2>
-    <div class="modal-content">
-      <p>Longo histórico de atuação direta no setor de Promoções, Eventos e Projetos Especiais da RPC, principal emissora afiliada da Rede Globo no estado do Paraná. Coordenação criativa e executiva de ativações de grande apelo público, engajamento comunitário e fortalecimento local da marca.</p>
-      
-      <p>Saiba mais sobre essa trajetória e as funções desempenhadas:</p>
-      <ul>
-        <li><a href="https://www.notion.so/RPC-Afiliada-TV-Globo-12f943d2d80780a79d36e43393121b6a?pvs=25" target="_blank">Histórico detalhado no Notion ↗</a></li>
-        <li><a href="https://linkedin.com/in/rodolffocorrea" target="_blank">Conexões profissionais no meu LinkedIn ↗</a></li>
-      </ul>
-    </div>
-  </div>
+<div class="modal-box">
+<div class="modal-header">
+<div>
+<span class="modal-tag">Promoções e Eventos</span>
+<h2 class="modal-title">RPC — Afiliada TV Globo</h2>
 </div>
-
-<div class="modal-overlay" id="modal-sicredi-sede" onclick="closeModalOnOverlay(event, 'modal-sicredi-sede')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-sicredi-sede')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">Institucional</span>
-    </div>
-    <h2 class="modal-title-text">Inauguração da Nova Sede — Sicredi Dexis</h2>
-    <div class="modal-content">
-      <p>Gerenciamento estratégico e operacional do plano de comunicação voltado à magna inauguração do novo edifício sede da cooperativa Sicredi Dexis. O escopo compreendeu a formulação da régua de relacionamento institucional, briefings e aprovação de materiais visuais complexos e ativação da cobertura midiática do evento.</p>
-      
-      <p>Veja os bastidores e os resultados deste marco institucional:</p>
-      <ul>
-        <li><a href="https://www.notion.so/Nova-Sede-Sicredi-Dexis-12f943d2d80780cea7d3e82dd392dd5f?pvs=25" target="_blank">Planejamento e Execução no Notion ↗</a></li>
-      </ul>
-    </div>
-  </div>
+<button class="modal-close" onclick="closeModal('modal-rpc')">✕</button>
 </div>
+<div class="modal-body">
+<p>Durante 4 anos, atuei como Assistente de Direção na equipe de Promoções e Eventos, contribuindo com a realização de projetos que fortaleceram a conexão da emissora com o público.
+Entre os principais projetos em que estive envolvido:</p>
 
-<div class="modal-overlay" id="modal-mega-outlet" onclick="closeModalOnOverlay(event, 'modal-mega-outlet')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-mega-outlet')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">Varejo · Evento</span>
-    </div>
-    <h2 class="modal-title-text">Mega Outlet 2024 — ACIM Maringá</h2>
-    <div class="modal-content">
-      <p>Arquitetura promocional e gerenciamento de canais para o Mega Outlet 2024, uma das principais feiras de comércio varejista do norte do Paraná. Planejamento estratégico focado em atração de fluxo físico qualificado através de mídia integrada online e offline, promoções internas e parcerias.</p>
-      
-      <p>Consulte o plano de marketing executado:</p>
-      <ul>
-        <li><a href="https://www.notion.so/Mega-Outlet-2024-12f943d2d8078044a840c3e685d400e3?pvs=25" target="_blank">Estratégia de Canais no Notion ↗</a></li>
-      </ul>
-    </div>
-  </div>
+<h3>Cobertura semifinal The Voice Brasil 2019</h3>
+<p><a href="https://globoplay.globo.com/v/7968469/" target="_blank" rel="noopener">Link Ao Vivo da cidade de Maringá/PR</a></p>
+
+<h3>Prepara RPC 2019</h3>
+<p><a href="https://globoplay.globo.com/v/8028342/" target="_blank" rel="noopener">Aulão de revisão para o Vestibular da UEL...</a></p>
+
+<h3>Cantata de Natal RPC</h3>
+<p><a href="https://globoplay.globo.com/v/8143235/" target="_blank" rel="noopener">Evento realizado no 'Zerão', em Londrina/PR</a></p>
+
+<h3>Numerologia de Ana Maria Braga</h3>
+<p><a href="https://globoplay.globo.com/v/8202687/" target="_blank" rel="noopener">Matéria gravada em Londrina/PR pela equipe local</a></p>
+
+<h3>Nosso Amor na RPC</h3>
+<p>Em 2020, atuei na organização da ação "Nosso Amor na RPC", um projeto desafiador desenvolvido em meio à pandemia.
+A iniciativa projetou mensagens de amor em prédios de Curitiba, Foz do Iguaçu, Cascavel, Maringá, Ponta Grossa e Londrina durante o mês de junho.</p>
+<p>Em Londrina, integrei o time responsável por executar a ação na cidade, com as seguintes tarefas:</p>
+<ul>
+<li>Curadoria de influenciadores para potencializar o impacto</li>
+<li>Preparação dos press kits</li>
+<li>Negociação com a empresa de projeções, garantindo a parceria sem custos</li>
+<li>Definição estratégica do local de exibição</li>
+</ul>
+</div>
+</div>
 </div>
 
 <div class="modal-overlay" id="modal-audiovisual" onclick="closeModalOnOverlay(event, 'modal-audiovisual')">
-  <div class="modal-wrapper">
-    <button class="modal-close-btn" onclick="closeModal('modal-audiovisual')">&times;</button>
-    <div class="modal-tags">
-      <span class="card-tag">Vídeo · Produção</span>
-    </div>
-    <h2 class="modal-title-text">Roteiros e Direção Audiovisual</h2>
-    <div class="modal-content">
-      <p>Compilado de criações focadas em vídeo estratégico. Atuação pontual desde a concepção de roteiros narrativos e comerciais, acompanhamento técnico em sets de filmagem/estúdios de gravação, até a supervisão de cortes finais e edição de vídeo alinhada aos objetivos de cada cliente.</p>
-      
-      <p>Assista aos projetos e analise os objetivos de conteúdo:</p>
-      <ul>
-        <li><a href="https://www.notion.so/Audiovisuais-1b6943d2d80780f7ab9cede2959f9c26?pvs=25" target="_blank">Portfólio com Justificativas no Notion ↗</a></li>
-        <li><a href="https://www.instagram.com/reel/C8Fs1f9xuG1/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Vídeo Institucional — Sicredi Dexis (Instagram Reel) ↗</a></li>
-        <li><a href="https://www.instagram.com/reel/C7pAAnfRGrn/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Campanha Comercial — ACIM Maringá (Instagram Reel) ↗</a></li>
-      </ul>
-    </div>
-  </div>
+<div class="modal-box">
+<div class="modal-header">
+<div>
+<span class="modal-tag">Audiovisual</span>
+<h2 class="modal-title">Roteiros audiovisuais para diversas empresas</h2>
+</div>
+<button class="modal-close" onclick="closeModal('modal-audiovisual')">✕</button>
+</div>
+<div class="modal-body">
+<p>Escrevi roteiros audiovisuais para empresas como Sicredi Dexis, Acim e Cocamar:</p>
+
+<h3>A Solidariedade é a nossa energia</h3>
+<p>Roteiro, direção de gravação e edição colaborativa.</p>
+<ul>
+<li><a href="https://youtube.com/playlist?list=PLKocVaA5VA7AO9BSBipJm_xsIGwp8WsXr&si=85-Jzx0BG-zC3gYP" target="_blank" rel="noopener">▶ Assista Aqui (playlist)</a></li>
+</ul>
+
+<h3>Sicredi Dexis — 37 anos</h3>
+<p>Roteiro e edição colaborativa.</p>
+<ul>
+<li><a href="https://www.instagram.com/reel/Ci-DpM2AEYT/?igsh=MTNzcHF1anVic3FxYw%3D%3D" target="_blank" rel="noopener">▶ Assista Aqui</a></li>
+</ul>
+
+<h3>Nossa Sede Sustentável — Sicredi Dexis</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=NzTM6YvhsCM" target="_blank" rel="noopener">▶ Assista Aqui</a></li>
+</ul>
+
+<h3>Sobras Cocamar</h3>
+<p>Roteiro, direção de gravação e edição colaborativa.</p>
+<ul>
+<li><a href="https://www.instagram.com/reel/C1IKzqKP9Zq/?igsh=MW52cmI3ZzQ1dnBlYg%3D%3D" target="_blank" rel="noopener">▶ Assista Aqui</a></li>
+</ul>
+
+<h3>Mega Outlet | William Souza</h3>
+<p>Roteiro e edição colaborativa.</p>
+<ul>
+<li><a href="https://www.instagram.com/reel/C9N2Nd8PKM-/?igsh=MTJ0Y3A3MHNhaTc5eg%3D%3D" target="_blank" rel="noopener">▶ Assista Aqui (1)</a></li>
+<li><a href="https://www.instagram.com/reel/C9SCxymOmil/?igsh=YjQ0dGFsMXl1c2cz" target="_blank" rel="noopener">▶ Assista Aqui (2)</a></li>
+<li><a href="#" target="_blank" rel="noopener">▶ Assista Aqui (3)</a></li>
+</ul>
+</div>
+</div>
 </div>
 
+<div class="modal-overlay" id="modal-domen" onclick="closeModalOnOverlay(event, 'modal-domen')">
+<div class="modal-box">
+<div class="modal-header">
+<div>
+<span class="modal-tag">Estratégia de Rebranding · Case de Sucesso</span>
+<h2 class="modal-title">O Rebranding Completo e Lançamento da Domen Store, Arapongas/PR</h2>
+</div>
+<button class="modal-close" onclick="closeModal('modal-domen')">✕</button>
+</div>
+<div class="modal-body">
+<p><strong>Cliente:</strong> Domen Store (antiga marca de vestuário infantil)<br>
+<strong>Responsável:</strong> Gume Inteligência Comercial<br>
+<strong>Objetivo:</strong> Reposicionar o modelo de negócios de uma marca de moda infantil para o mercado de moda masculina premium em Arapongas.</p>
+
+<h3>O Desafio</h3>
+<p>A proprietária da marca gerenciava uma operação voltada para o público infantil, onde o processo de compra e a comunicação eram direcionados quase que exclusivamente às mães.
+Identificando uma oportunidade de mercado, ela buscou a Gume para realizar uma virada de chave: transicionar o negócio para o setor de moda masculina de alto padrão, focado em elegância e minimalismo.</p>
+
+<h3>A Solução</h3>
+<p>Junto com o time da Gume, construímos uma estratégia responsável por toda a jornada de transformação da marca, atuando de ponta a ponta através dos seguintes pilares:</p>
+<ul>
+<li><strong>Naming e Identidade Visual:</strong> Criação do novo nome "Domen Store" e acompanhamento do desenvolvimento de uma identidade visual alinhada aos conceitos de sofisticação e minimalismo.</li>
+<li><strong>Estratégia de Posicionamento:</strong> Transição de público do universo infantil para um conceito sóbrio, clean e focado na elegância masculina, influenciando desde a curadoria dos produtos até a atmosfera física da loja.</li>
+<li><strong>Experiência do Cliente (CX):</strong> Planejamento de um formato diferenciado de atendimento na loja física, desenhado para tornar a jornada de decisão do homem mais fluida e confortável.</li>
+<li><strong>Treinamento de Equipe:</strong> Alinhamento estratégico e capacitação do time de vendas para garantir que a nova promessa da marca fosse entregue com consistência em cada ponto de contato.</li>
+<li><strong>Estratégia de Lançamento e Co-branding:</strong> Planejamento do evento de inauguração e estruturação de ações de collab com marcas locais que compartilham o mesmo público-alvo.</li>
+</ul>
+
+<h3>O Resultado</h3>
+<p>A parceria com a Gume resultou no nascimento da Domen Store, um novo marco de elegância e atitude para a moda masculina em Arapongas.
+Com uma presença imponente e uma proposta de valor clara, a marca conseguiu se distanciar com sucesso do antigo nicho infantil, consolidando-se como um espaço de experiência e sofisticação essencial para o homem moderno.</p>
+<p><a href="https://www.instagram.com/domen_store/reel/DW7aks2mh_H/" target="_blank" rel="noopener">▶ Assista Aqui</a></p>
+</div>
+</div>
+</div>
 
 <script>
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+a.addEventListener('click', e => {
+e.preventDefault();
+const target = document.querySelector(a.getAttribute('href'));
+if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+});
 
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const delay = (Array.from(reveals).indexOf(entry.target) % 3) * 80;
-        setTimeout(() => entry.target.classList.add('visible'), delay);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => observer.observe(el));
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+entries.forEach((entry) => {
+if (entry.isIntersecting) {
+const delay = (Array.from(reveals).indexOf(entry.target) % 3) * 80;
+setTimeout(() => entry.target.classList.add('visible'), delay);
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
 
-  // Modal functions
-  function openModal(id) {
-    document.getElementById(id).classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
+// Modal functions
+function openModal(id) {
+document.getElementById(id).classList.add('active');
+document.body.style.overflow = 'hidden';
+}
 
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
-    document.body.style.overflow = '';
-  }
+function closeModal(id) {
+document.getElementById(id).classList.remove('active');
+document.body.style.overflow = '';
+}
 
-  function closeModalOnOverlay(event, id) {
-    if (event.target === document.getElementById(id)) {
-      closeModal(id);
-    }
-  }
+function closeModalOnOverlay(event, id) {
+if (event.target === document.getElementById(id)) {
+closeModal(id);
+}
+}
 
-  // Close modal with ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const activeModal = document.querySelector('.modal-overlay.active');
-      if (activeModal) {
-        closeModal(activeModal.id);
-      }
-    }
-  });
+// Close modal with ESC
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') {
+document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+modal.classList.remove('active');
+});
+document.body.style.overflow = '';
+}
+});
 </script>
 </body>
 </html>
